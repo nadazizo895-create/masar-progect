@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان HTML - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='html') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان HTML 🌐</h1>
+        <p>10 أسئلة تغطي أساسيات HTML. بالتوفيق!</p>
+        <form action="/exam/html" method="POST" class="exam-form">
+
+            <div class="question-card">
+                <p>1. ما هو الوسم الصحيح لأكبر عنوان؟</p>
+                <label><input type="radio" name="q1" value="1"> &lt;h1&gt;</label>
+                <label><input type="radio" name="q1" value="0"> &lt;h6&gt;</label>
+                <label><input type="radio" name="q1" value="0"> &lt;header&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>2. كيف نفتح رابطاً في تبويب جديد؟</p>
+                <label><input type="radio" name="q2" value="1"> target="_blank"</label>
+                <label><input type="radio" name="q2" value="0"> target="new"</label>
+                <label><input type="radio" name="q2" value="0"> open="tab"</label>
+            </div>
+
+            <div class="question-card">
+                <p>3. أي وسم يُضيف سطراً جديداً؟</p>
+                <label><input type="radio" name="q3" value="1"> &lt;br&gt;</label>
+                <label><input type="radio" name="q3" value="0"> &lt;lb&gt;</label>
+                <label><input type="radio" name="q3" value="0"> &lt;nl&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>4. ما الوسم المستخدم لقائمة غير مرتبة؟</p>
+                <label><input type="radio" name="q4" value="1"> &lt;ul&gt;</label>
+                <label><input type="radio" name="q4" value="0"> &lt;ol&gt;</label>
+                <label><input type="radio" name="q4" value="0"> &lt;list&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>5. ما السمة المستخدمة لإضافة مصدر الصورة؟</p>
+                <label><input type="radio" name="q5" value="1"> src</label>
+                <label><input type="radio" name="q5" value="0"> href</label>
+                <label><input type="radio" name="q5" value="0"> link</label>
+            </div>
+
+            <div class="question-card">
+                <p>6. ما الوسم المستخدم لإنشاء جدول؟</p>
+                <label><input type="radio" name="q6" value="1"> &lt;table&gt;</label>
+                <label><input type="radio" name="q6" value="0"> &lt;grid&gt;</label>
+                <label><input type="radio" name="q6" value="0"> &lt;tab&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>7. ما الوسم المستخدم لإنشاء نموذج إدخال؟</p>
+                <label><input type="radio" name="q7" value="1"> &lt;form&gt;</label>
+                <label><input type="radio" name="q7" value="0"> &lt;input-form&gt;</label>
+                <label><input type="radio" name="q7" value="0"> &lt;submit&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>8. ما الوسم المستخدم للتعليق في HTML؟</p>
+                <label><input type="radio" name="q8" value="1"> &lt;!-- تعليق --&gt;</label>
+                <label><input type="radio" name="q8" value="0"> // تعليق</label>
+                <label><input type="radio" name="q8" value="0"> # تعليق</label>
+            </div>
+
+            <div class="question-card">
+                <p>9. ما الوسم الذي يُعرّف قسماً في HTML5؟</p>
+                <label><input type="radio" name="q9" value="1"> &lt;section&gt;</label>
+                <label><input type="radio" name="q9" value="0"> &lt;div&gt;</label>
+                <label><input type="radio" name="q9" value="0"> &lt;part&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>10. ما الوسم المستخدم لإدراج ملف CSS خارجي؟</p>
+                <label><input type="radio" name="q10" value="1"> &lt;link rel="stylesheet"&gt;</label>
+                <label><input type="radio" name="q10" value="0"> &lt;css&gt;</label>
+                <label><input type="radio" name="q10" value="0"> &lt;style src=""&gt;</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

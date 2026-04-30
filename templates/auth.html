@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تسجيل الدخول - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="register-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('about') }}" class="btn-modern3">رجوع</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <div class="glass-container">
+        <h2>تسجيل الدخول</h2>
+
+       <form action="/auth" method="POST">
+    <div class="input-group">
+        <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+    </div>
+    
+    <div class="input-group">
+        <input type="password" name="password" placeholder="كلمة المرور" required>
+    </div>
+    
+    <div class="button-row">
+        <button type="submit" class="btn-modern">ابدأ</button>
+    </div>
+</form>
+        <br>
+        <div class="auth-options">
+            <p>ليس لديك حساب؟ <a href="{{ url_for('register') }}" class="btn-modern">إنشاء حساب</a></p>
+            <br>
+            <a href="{{ url_for('forgot') }}" class="btn-modern">نسيت كلمة المرور</a>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

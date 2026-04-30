@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان JavaScript - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='js') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان JavaScript ⚡</h1>
+        <p>10 أسئلة تغطي أساسيات JavaScript. بالتوفيق!</p>
+        <form action="/exam/js" method="POST" class="exam-form">
+
+            <div class="question-card">
+                <p>1. كيف نكتب رسالة تحذير في JavaScript؟</p>
+                <label><input type="radio" name="q1" value="1"> alert("Hello");</label>
+                <label><input type="radio" name="q1" value="0"> msg("Hello");</label>
+                <label><input type="radio" name="q1" value="0"> print("Hello");</label>
+            </div>
+
+            <div class="question-card">
+                <p>2. أي علامة للمساواة في القيم والنوع معاً؟</p>
+                <label><input type="radio" name="q2" value="1"> ===</label>
+                <label><input type="radio" name="q2" value="0"> ==</label>
+                <label><input type="radio" name="q2" value="0"> =</label>
+            </div>
+
+            <div class="question-card">
+                <p>3. ما الكلمة المفتاحية لمتغير ثابت لا يتغير؟</p>
+                <label><input type="radio" name="q3" value="1"> const</label>
+                <label><input type="radio" name="q3" value="0"> var</label>
+                <label><input type="radio" name="q3" value="0"> fixed</label>
+            </div>
+
+            <div class="question-card">
+                <p>4. كيف نختار عنصر بـ id في JavaScript؟</p>
+                <label><input type="radio" name="q4" value="1"> document.getElementById("id")</label>
+                <label><input type="radio" name="q4" value="0"> document.getElement("id")</label>
+                <label><input type="radio" name="q4" value="0"> html.select("id")</label>
+            </div>
+
+            <div class="question-card">
+                <p>5. ما الدالة للطباعة في console؟</p>
+                <label><input type="radio" name="q5" value="1"> console.log()</label>
+                <label><input type="radio" name="q5" value="0"> print()</label>
+                <label><input type="radio" name="q5" value="0"> log()</label>
+            </div>
+
+            <div class="question-card">
+                <p>6. كيف نُعرّف دالة في JavaScript؟</p>
+                <label><input type="radio" name="q6" value="1"> function myFunc() {}</label>
+                <label><input type="radio" name="q6" value="0"> def myFunc() {}</label>
+                <label><input type="radio" name="q6" value="0"> func myFunc() {}</label>
+            </div>
+
+            <div class="question-card">
+                <p>7. كيف نضيف عنصر لنهاية مصفوفة؟</p>
+                <label><input type="radio" name="q7" value="1"> array.push()</label>
+                <label><input type="radio" name="q7" value="0"> array.add()</label>
+                <label><input type="radio" name="q7" value="0"> array.append()</label>
+            </div>
+
+            <div class="question-card">
+                <p>8. ما الكلمة المفتاحية للحلقة التكرارية الشرطية؟</p>
+                <label><input type="radio" name="q8" value="1"> while</label>
+                <label><input type="radio" name="q8" value="0"> loop</label>
+                <label><input type="radio" name="q8" value="0"> repeat</label>
+            </div>
+
+            <div class="question-card">
+                <p>9. كيف نحوّل نص إلى رقم؟</p>
+                <label><input type="radio" name="q9" value="1"> parseInt()</label>
+                <label><input type="radio" name="q9" value="0"> toNumber()</label>
+                <label><input type="radio" name="q9" value="0"> number()</label>
+            </div>
+
+            <div class="question-card">
+                <p>10. ما الكلمة المفتاحية للشرط في JavaScript؟</p>
+                <label><input type="radio" name="q10" value="1"> if</label>
+                <label><input type="radio" name="q10" value="0"> when</label>
+                <label><input type="radio" name="q10" value="0"> check</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

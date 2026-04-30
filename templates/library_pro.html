@@ -1,0 +1,136 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>المكتبة - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="library-page">
+    <!-- ══ HEADER ══ -->
+   <header class="main-header">
+          <div class="nav-container">
+              <a href="{{ url_for('track_detail', slug='web') }}" class="btn-modern3">رجوع</a> 
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+    </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="logo" class="header-logo">
+        </div> 
+    </header>
+<div class="container">
+    <div class="section web">
+        <div class="section-header">
+            <div class="section-icon"></div>
+            <div class="section-title">تطوير الويب</div>
+        </div>
+        <div class="book-card">
+            <div class="book-info"><span class="book-icon"></span>
+            <div>
+            <div class="book-name">كتاب HTML</div>
+            <div class="book-lang">لغة HTML</div>
+        </div>
+    </div>
+            <a class="open-btn" href="/static/book/html.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+        <div class="book-card">
+            <div class="book-info">
+                <span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب CSS</div>
+                <div class="book-lang">لغة CSS</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/css.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+        <div class="book-card">
+            <div class="book-info"><span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب PHP</div>
+                <div class="book-lang">لغة PHP</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/php.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+        <div class="book-card">
+            <div class="book-info">
+              <span class="book-icon"></span>
+              <div>
+                <div class="book-name">كتاب Node.JS</div>
+              <div class="book-lang">لغة Node.JS</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/Node.JS.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+    </div>
+
+    <div class="section mobile">
+        <div class="section-header">
+            <div class="section-icon"></div>
+            <div class="section-title">تطوير الموبايل</div>
+        </div>
+        <div class="book-card">
+            <div class="book-info">
+                <span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب Flutter</div>
+                <div class="book-lang">لغة Flutter</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/flutter.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+        <div class="book-card">
+            <div class="book-info">
+                <span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب Kotlin</div>
+                <div class="book-lang">لغة Kotlin</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/kotlin.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+        <div class="book-card">
+            <div class="book-info">
+                <span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب XML</div>
+                <div class="book-lang">لغة XML</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/xml.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+           <div class="book-card">
+            <div class="book-info">
+                <span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب Java</div>
+                <div class="book-lang">لغة Java</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/java.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+    </div>
+    <div class="section database">
+        <div class="section-header">
+            <div class="section-icon"></div>
+            <div class="section-title">قواعد البيانات</div>
+        </div>
+        <div class="book-card">
+            <div class="book-info">
+                <span class="book-icon"></span>
+                <div>
+                <div class="book-name">كتاب SQL</div>
+                <div class="book-lang">لغة SQL</div>
+            </div>
+        </div>
+            <a class="open-btn" href="/static/book/sql.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+          <div class="book-card">
+            <div class="book-info"><span class="book-icon"></span><div><div class="book-name">كتاب Python الشامل</div><div class="book-lang">لغة Python</div></div></div>
+            <a class="open-btn" href="/static/book/python.pdf" target="_blank">فتح الكتاب</a>
+        </div>
+    </div>
+</div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</div>
+</body>
+</html>

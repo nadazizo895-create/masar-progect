@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>دروس React - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="lessonss-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('track_detail', slug='web') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+            <a href="{{ url_for('library_pro') }}" class="btn-modern3">الذهاب إلى المكتبة</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <main class="course-container">
+        <div class="text-center">
+            <h1>⚛️ دروس React</h1>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/6rYX_yZu0jA?si=3rQ9NuqmgkhJtD3_" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h3>بناء واجهات مستخدم تفاعلية بـ React</h3>
+        </div>
+        <hr>
+        <aside class="video">
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/_u3N1k8NXag?si=D09xRQp9W03CC5oQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/aF65SbNW0Tg?si=dXEaUsrOJO7djuXz" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/kTnk_GxAqCw?si=x0y9Z1kK6vgvjCEL" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/W7iaZ8OTZFs?si=CKR850c8t7lZNMAp" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/Kq5frhirhTM?si=kXNy1eKXou7u7wsv" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/oBrLJPrmaBg?si=l8Ia1t5hp52S-nor" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/HaEqd2pVXKs?si=_FbzSAZdNiykFn4j" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/zGJIuQ-2LME?si=YPfx5Fw-XiP50vzg" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+           <iframe width="560" height="315" src="https://www.youtube.com/embed/CUCr3HKcHQE?si=bqy1277t8aCyb_iQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </aside>
+    </main>
+    <div class="button-row">
+        <a href="{{ url_for('exam', slug='react') }}" class="btn-modern">ابدأ الامتحان</a>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

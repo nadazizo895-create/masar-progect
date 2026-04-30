@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>الدفع</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="register-page">
+<header class="main-header">
+            <div class="nav-container">
+    <a href="{{ url_for('result') }}" class="btn-modern3">رجوع</a> 
+     <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a> 
+          </div>
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static',filename='image/lo.png')}}" alt="شعار" class='header-logo'>
+    </header>
+    <div class="glass-container">
+        <h1>أكمل اشتراكك</h1>
+
+        <form action="/payment" method="POST">
+            <div class="input-group">
+                <label>اسم حامل البطاقة</label>
+                <input type="text" name="card_name" placeholder="الاسم الكامل" required>
+            </div>
+
+            <div class="input-group">
+                <label>رقم البطاقة</label>
+                <input type="text" name="card_num" placeholder="1234 5678 9101 1121" required>
+            </div>
+                <div class="input-group">
+                    <label>رمز CVV</label>
+                    <input type="password" name="cvv" placeholder="***" required>
+            <button type="submit" class="btn-modern">تأكيد الدفع (50 جنيه)</button>
+        </form>
+    </div>
+    <br><br>
+     <div id="chat-icon" onclick="toggleChat()">💬</div>
+<div id="ai-chat-container">
+    <div id="chat-header">بوت مسار الذكي</div>
+    <div id="chat-output">أهلاً ، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+    <div id="chat-input-area">
+        <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+        <button id="send-btn">إرسال</button>
+    </div>
+   <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

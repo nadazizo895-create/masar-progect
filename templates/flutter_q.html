@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Flutter - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='flutter') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان Flutter 📱</h1>
+        <p>10 أسئلة تغطي أساسيات Flutter. بالتوفيق!</p>
+        <form action="/exam/flutter" method="POST" class="exam-form">
+
+            <div class="question-card">
+                <p>1. ما اللغة المستخدمة في Flutter؟</p>
+                <label><input type="radio" name="q1" value="1"> Dart</label>
+                <label><input type="radio" name="q1" value="0"> Kotlin</label>
+                <label><input type="radio" name="q1" value="0"> Swift</label>
+            </div>
+
+            <div class="question-card">
+                <p>2. ما الـ Widget الأساسي لعرض نص؟</p>
+                <label><input type="radio" name="q2" value="1"> Text</label>
+                <label><input type="radio" name="q2" value="0"> Label</label>
+                <label><input type="radio" name="q2" value="0"> TextView</label>
+            </div>
+
+            <div class="question-card">
+                <p>3. أي Widget يحتوي على state قابل للتغيير؟</p>
+                <label><input type="radio" name="q3" value="1"> StatefulWidget</label>
+                <label><input type="radio" name="q3" value="0"> StatelessWidget</label>
+                <label><input type="radio" name="q3" value="0"> DynamicWidget</label>
+            </div>
+
+            <div class="question-card">
+                <p>4. ما الأمر لتشغيل تطبيق Flutter؟</p>
+                <label><input type="radio" name="q4" value="1"> flutter run</label>
+                <label><input type="radio" name="q4" value="0"> dart run</label>
+                <label><input type="radio" name="q4" value="0"> flutter start</label>
+            </div>
+
+            <div class="question-card">
+                <p>5. ما Widget التخطيط العمودي؟</p>
+                <label><input type="radio" name="q5" value="1"> Column</label>
+                <label><input type="radio" name="q5" value="0"> Row</label>
+                <label><input type="radio" name="q5" value="0"> Stack</label>
+            </div>
+
+            <div class="question-card">
+                <p>6. ما Widget التخطيط الأفقي؟</p>
+                <label><input type="radio" name="q6" value="1"> Row</label>
+                <label><input type="radio" name="q6" value="0"> Column</label>
+                <label><input type="radio" name="q6" value="0"> Flex</label>
+            </div>
+
+            <div class="question-card">
+                <p>7. ما Widget لعرض صورة في Flutter؟</p>
+                <label><input type="radio" name="q7" value="1"> Image</label>
+                <label><input type="radio" name="q7" value="0"> Img</label>
+                <label><input type="radio" name="q7" value="0"> Picture</label>
+            </div>
+
+            <div class="question-card">
+                <p>8. ما الأمر لإنشاء مشروع Flutter جديد؟</p>
+                <label><input type="radio" name="q8" value="1"> flutter create</label>
+                <label><input type="radio" name="q8" value="0"> flutter new</label>
+                <label><input type="radio" name="q8" value="0"> dart create</label>
+            </div>
+
+            <div class="question-card">
+                <p>9. ما Widget زر النقر الأساسي في Flutter؟</p>
+                <label><input type="radio" name="q9" value="1"> ElevatedButton</label>
+                <label><input type="radio" name="q9" value="0"> Button</label>
+                <label><input type="radio" name="q9" value="0"> ClickButton</label>
+            </div>
+
+            <div class="question-card">
+                <p>10. ما الدالة التي تُستدعى عند تغيير state؟</p>
+                <label><input type="radio" name="q10" value="1"> setState()</label>
+                <label><input type="radio" name="q10" value="0"> updateState()</label>
+                <label><input type="radio" name="q10" value="0"> refresh()</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>النتيجة - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="lessonss-page">
+
+    <!-- ===== HEADER ===== -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('exam', slug=session.get('exam_track', 'web')) }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <!-- ===== MAIN CARD ===== -->
+    <div class="main-content">
+        <div class="card">
+
+            <p class="text-center">تحليل المسار الأكاديمي</p>
+
+            <h1 class="result-percent">{{ result.percent }}%</h1>
+
+            <!-- شريط التقدم -->
+            <div class="progress-track">
+                <div class="progress-fill"></div>
+            </div>
+
+            {% if show_certificate %}
+                <!-- نجح -->
+                <p class="result-note success">أحسنت! يمكنك الاشتراك للوصول للمحتوى الحصري</p>
+                <div class="button-row">
+                    <a href="{{ url_for('payment') }}" class="btn-modern">الدفع والاشتراك</a>
+                </div>
+                <div class="button-row">
+                    <a href="{{ url_for('certificate_download', exam_id=exam_id) }}" class="btn-modern">🏆 احصل على شهادتك</a>
+            {% else %}
+                <!-- رسب -->
+                <p class="result-note retry">راجع المحتوى وحاول مرة أخرى</p>
+                <div class="button-row">
+                    <a href="{{ url_for('choice') }}" class="btn-modern">العودة للدروس</a>
+                </div>
+            {% endif %}
+
+        </div>
+    </div>
+
+    <!-- ===== CHAT ===== -->
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

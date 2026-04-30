@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>اختبار اكتشاف الشغف - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="final-exam-page">
+     <header class="main-header">
+    <div class="nav-container">
+    <a href="{{ url_for('choice') }}" class="btn-modern3">رجوع</a> 
+    <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a> 
+    </div>
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static',filename='image/lo.png')}}" alt="شعار" class='header-logo'>
+    </header>
+    <div class="quiz-container">
+        <h1>اختبار اكتشاف مسارك</h1>
+        <h1>جاوب حسب شخصيتك، مفيش إجابة صح وإجابة غلط!</h1>
+        <form action="/quiz" method="POST">
+            <div class="question-card">
+                <h3>1. لما بتشوف أبلكيشن أو موقع جديد، إيه أول حاجة بتلفت نظرك؟</h3>
+                <input type="radio" name="q1" id="q1a" value="a" required>
+                <label for="q1a">الألوان، التنسيق، وشكل الزراير.</label><br>
+                <input type="radio" name="q1" id="q1b" value="b">
+                <label for="q1b">السرعة وإزاي البيانات بتظهر وبتروح فين.</label><br>
+                <input type="radio" name="q1" id="q1c" value="c">
+                <label for="q1c">التقارير والأرقام اللي البرنامج بيطلعها.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>2. إيه أكتر نشاط ممكن تستمتع بيه وأنت بتشتغل؟</h3>
+                <input type="radio" name="q2" id="q2a" value="a" required>
+                <label for="q2a">أرسم وأصمم حاجة الناس تشوفها وتنبهر بيها.</label><br>
+                <input type="radio" name="q2" id="q2b" value="b">
+                <label for="q2b">أحل لغز معقد أو أصلح حاجة بايظة "من جوه".</label><br>
+                <input type="radio" name="q2" id="q2c" value="c">
+                <label for="q2c">أجمع معلومات وأرتبها عشان أطلع بقرار صح.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>3. لو معاك "مكعبات ليجو" (Lego)، هتحب تعمل بيها إيه؟</h3>
+                <input type="radio" name="q3" id="q3a" value="a" required>
+                <label for="q3a">أعمل بيت شكله شيك جداً من بره وألوانه متناسقة.</label><br>
+                <input type="radio" name="q3" id="q3b" value="b">
+                <label for="q3b">أعمل موتور أو تروس تخلي البيت ده يتحرك.</label><br>
+                <input type="radio" name="q3" id="q3c" value="c">
+                <label for="q3c">أعد المكعبات وأصنفهم حسب النوع والوزن.</label>
+            </div><br>
+            <div class="question-card">
+                <h3>4. لو هتعمل مشروع صغير دلوقتي، إيه أكتر حاجة تجذبك؟</h3>
+                <input type="radio" name="q4" id="q4a" value="a" required>
+                <label for="q4a">موقع إلكتروني بيعرض خدمة أو متجر.</label><br>
+                <input type="radio" name="q4" id="q4b" value="b">
+                <label for="q4b">أبلكيشن موبايل يحل مشكلة يومية للناس.</label><br>
+                <input type="radio" name="q4" id="q4c" value="c">
+                <label for="q4c">لوحة تحليل بيانات بيانات توضح أرقام وإحصاءات.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>5. أيه من دول أكتر حاجة بتقضي فيها وقتك على النت؟</h3>
+                <input type="radio" name="q5" id="q5a" value="a" required>
+                <label for="q5a">بتتصفح مواقع وبتلاحظ تصميمها وتجربة المستخدم فيها.</label><br>
+                <input type="radio" name="q5" id="q5b" value="b">
+                <label for="q5b">بتجرب تطبيقات موبايل جديدة وبتشوف المميزات بتاعتها.</label><br>
+                <input type="radio" name="q5" id="q5c" value="c">
+                <label for="q5c">بتقرأ إحصاءات وتقارير وبتحب تفهم الأرقام وراها.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>6. لو شركة عرضت عليك وظيفة، إيه اللي هيجذبك أكتر؟</h3>
+                <input type="radio" name="q6" id="q6a" value="a" required>
+                <label for="q6a">مطور ويب: بتبني مواقع وواجهات جميلة وتفاعلية.</label><br>
+                <input type="radio" name="q6" id="q6b" value="b">
+                <label for="q6b">مطور تطبيقات: بتطور أبلكيشنات iOS وAndroid.</label><br>
+                <input type="radio" name="q6" id="q6c" value="c">
+                <label for="q6c">محلل بيانات: بتحول أرقام وجداول لقرارات مهمة.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>7. لما بتشوف رسالة خطأ في برنامج، إيه أول حاجة بتيجي في دماغك؟</h3>
+                <input type="radio" name="q7" id="q7a" value="a" required>
+                <label for="q7a">إزاي أخلي الرسالة دي تظهر بشكل أحسن للمستخدم.</label><br>
+                <input type="radio" name="q7" id="q7b" value="b">
+                <label for="q7b">أدخل جوه الكود وأصلح السبب الحقيقي للمشكلة.</label><br>
+                <input type="radio" name="q7" id="q7c" value="c">
+                <label for="q7c">أجمع بيانات عن المشكلة وأحلل كام مرة حصلت وليه.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>8. لو عندك داتا عن مبيعات شركة، إيه اللي هتعمله بيها؟</h3>
+                <input type="radio" name="q8" id="q8a" value="a" required>
+                <label for="q8a">أعمل صفحة ويب تعرض المنتجات والعروض بشكل جذاب.</label><br>
+                <input type="radio" name="q8" id="q8b" value="b">
+                <label for="q8b">أعمل أبلكيشن تقدر منه تطلب وتتابع طلباتك من موبايلك.</label><br>
+                <input type="radio" name="q8" id="q8c" value="c">
+                <label for="q8c">أحللها وأطلع تقرير بأكتر المنتجات مبيعاً وأسباب النجاح.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>9. إيه اللي بيتعبك أكتر لما بتتعلم حاجة جديدة في التكنولوجيا؟</h3>
+                <input type="radio" name="q9" id="q9a" value="a" required>
+                <label for="q9a">لما التصميم بيبقى مش متناسق والألوان مش مظبوطة.</label><br>
+                <input type="radio" name="q9" id="q9b" value="b">
+                <label for="q9b">لما الأبلكيشن بطيء أو بيتعلق على موبايلات معينة.</label><br>
+                <input type="radio" name="q9" id="q9c" value="c">
+                <label for="q9c">لما البيانات ناقصة أو غلط وبتأثر على نتيجة التحليل.</label>
+            </div><br>
+
+            <div class="question-card">
+                <h3>10. لو هتشرح لحد من أهلك اللي بتحب تعمله، هتقوله إيه؟</h3>
+                <input type="radio" name="q10" id="q10a" value="a" required>
+                <label for="q10a">بعمل مواقع على الإنترنت زي اللي بتفتحها كل يوم.</label><br>
+                <input type="radio" name="q10" id="q10b" value="b">
+                <label for="q10b">بعمل التطبيقات اللي بتنزلها على تليفونك.</label><br>
+                <input type="radio" name="q10" id="q10c" value="c">
+                <label for="q10c">بشتغل على الأرقام والبيانات وبساعد الشركات تاخد قرارات صح.</label>
+            </div><br>
+
+           <div class="button-row">
+             <button type="submit" class="btn-modern">اكتشف مساري المناسب</button>
+           </div>
+        </form>
+    </div>
+
+  <div id="chat-icon" onclick="toggleChat()">💬</div>
+  <div id="ai-chat-container">
+    <div id="chat-header">بوت مسار الذكي</div>
+    <div id="chat-output">أهلاً ، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+    <div id="chat-input-area">
+        <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+        <button id="send-btn">إرسال</button>
+    </div>
+  </div>
+
+  <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

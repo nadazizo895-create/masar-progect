@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>عن مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="admin_page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+<main>
+    <h1>لوحة إدارة مسار</h1>
+
+    <section>
+         <div class="choices-container3">
+          <div class="option-circle3">
+            <div id="stat-total">—</div>
+            <div>إجمالي الطلاب</div>
+        </div>
+          <div class="option-circle3">
+            <div id="stat-paid">—</div>
+            <div>مشتركون مدفوعون</div>
+        </div>
+         <div class="option-circle3">
+            <div id="stat-pending">—</div>
+            <div>في الانتظار</div>
+         </div>
+        </div>
+        <div class="choices-container3">
+          <div class="option-circle3">
+            <div id="stat-exams">—</div>
+            <div>امتحانات مكتملة</div>
+        </div>
+          <div class="option-circle3">
+            <div id="stat-avg">—</div>
+            <div>متوسط الدرجات</div>
+          </div>
+          <div class="option-circle3">
+            <div id="stat-revenue">—</div>
+            <div>إجمالي الإيرادات</div>
+        </div>
+    </section>
+
+    <section>
+        <h3>إدارة الطلاب</h3>
+        <table>
+            <thead>
+                <tr>
+                    <th>#</th>
+                    <th>الاسم</th>
+                    <th>البريد</th>
+                    <th>تاريخ الاشتراك</th>
+                    <th>الحالة</th>
+                    <th>إجراء</th>
+                </tr>
+            </thead>
+            <tbody id="students-tbody">
+                <!-- يتم ملؤها عن طريق script.js -->
+            </tbody>
+        </table>
+    </section>
+</main>
+
+<div id="chat-icon">💬</div>
+<div id="ai-chat-container">
+    <div id="chat-header">بوت مسار الذكي</div>
+    <div id="chat-output">أهلاً! كيف يمكنني مساعدتك؟</div>
+    <div id="chat-input-area">
+        <input type="text" id="user-query" placeholder="اكتب سؤالك...">
+        <button id="send-btn">إرسال</button>
+    </div>
+</div>
+
+<footer>
+    © 2026 منصة مسار التعليمية
+</footer>
+
+<script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

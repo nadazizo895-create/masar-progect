@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تم تسجيل الخروج - مسار</title>
+  <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="lessonss-page">
+    <header class="main-header">
+           <div class="nav-container">
+            <a href="{{ url_for('auth') }}" class="btn-modern3">رجوع</a> 
+    </div>
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class='header-logo'>
+    </header>
+    <div class="logout-message">
+        <h1 class="text-center">شكراً لثقتك في مسار</h1>
+        <p class="text-center">تم تسجيل خروجك بنجاح، نتمنى لك رحلة تعليمية ممتعة</p>
+    </div>
+   <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

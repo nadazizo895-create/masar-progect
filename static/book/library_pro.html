@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html dir="rtl"lang="en">
+    <meta charset="UTF-8">
+    <title>المكتبة - مسار</title>
+     <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="library-page">
+   <header class="main-header">
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static', filename='image/lo.png') }}" alt="logo"class='header-logo'>
+    </header>
+     <h1>مكتبة مسار الرقمية </h1>
+     <div class="choices-container2">
+     <section class="option-circle2">
+        <legend><h2>كتب مجانية (ابدأ التعلم الآن)</h2></legend>
+         <legend><h2>كتب احترافيه </h2></legend>
+        <ul>
+            <li>كتاب: أساسيات البرمجة للمبتدئين - <a href="#"class="btn-modern2" >تحميل</a></li>
+            <li>كتاب: مدخل إلى التصميم الجرافيكي - <a href="#"class="btn-modern2" >تحميل</a></li>
+            <li>كتاب: دليل تعلم اللغة الإنجليزية - <a href="#"class="btn-modern2" >تحميل</a></li>
+        </ul>
+      </section>
+
+    <br>
+       
+     <section class="option-circle2">
+        <legend><h2>كتب مجانية app</h2></legend>
+        <legend><h2>كتب احترافيه </h2></legend>
+        <ul>
+            <br>
+             <li>كتاب  flutter<a href="../book/Noor-Book.com  تعلم flutter.pdf"target="_blank"class="btn-modern2">viw</a><br>
+             <li>كتاب  flutter<a href="../book/Noor-Book.com  تعلم flutter.pdf"target="_blank"class="btn-modern2">viw</a><br>
+             <li>كتاب  flutter<a href="../book/Noor-Book.com  تعلم flutter.pdf"target="_blank"class="btn-modern2">viw</a><br>
+        </ul>
+      </section>
+     <br>
+       
+      <section class="option-circle2">
+        <legend><h2>كتب مجانية (ابدأ التعلم الآن)</h2></legend>
+        <legend><h2>كتب احترافيه </h2></legend>
+        
+        <ul>
+            <li>كتاب: أساسيات البرمجة للمبتدئين - <a href="#" class="btn-modern2">تحميل</a></li>
+            <li>كتاب: مدخل إلى التصميم الجرافيكي - <a href="#" class="btn-modern2">تحميل</a></li>
+            <li>كتاب: دليل تعلم اللغة الإنجليزية - <a href="#"class="btn-modern2" >تحميل</a></li>
+        </ul>
+      </section>
+       <div class="ss-section">
+      <br> <h1>كتب اشتراك</h1>
+      <a href="{{ url_for('payment') }}"class="btn-modern">الدفع</a>
+     </div>
+        <section class="option-circle2">
+        <legend><h2>كتب احترافية (اشتراك مميز)</h2></legend>
+        <p>هذه الكتب متاحة فقط للمشتركين في الباقة الذهبية</p>
+        <ul>
+            <li>كتاب: احتراف الذكاء الاصطناعي (مدفوع)</li>
+            <li>كتاب: استراتيجيات التسويق العالمي (مدفوع)</li>
+            <li>كتاب: إدارة المشاريع البرمجية كالمحترفين (مدفوع)</li>
+        </ul>
+     </section>
+     <section class="option-circle2">
+        <legend><h2>كتب احترافية (اشتراك مميز)</h2></legend>
+        <p>هذه الكتب متاحة فقط للمشتركين في الباقة الذهبية</p>
+        <ul>
+            <li>كتاب: احتراف الذكاء الاصطناعي (مدفوع)</li>
+            <li>كتاب: استراتيجيات التسويق العالمي (مدفوع)</li>
+            <li>كتاب: إدارة المشاريع البرمجية كالمحترفين (مدفوع)</li>
+        </ul>
+     </section>
+     <br>
+       
+     <section class="option-circle2">
+        <legend><h2>كتب احترافية (اشتراك مميز)</h2></legend>
+        <p>هذه الكتب متاحة فقط للمشتركين في الباقة الذهبية</p>
+        <ul>
+            <li>كتاب: احتراف الذكاء الاصطناعي (مدفوع)</li>
+            <li>كتاب: استراتيجيات التسويق العالمي (مدفوع)</li>
+            <li>كتاب: إدارة المشاريع البرمجية كالمحترفين (مدفوع)</li>
+        </ul>
+     </section>
+     </div>
+
+    <div class="button-row">
+    <a href="{{ url_for('index') }}"class="btn-modern">الرجوع للرئيسية</a>
+     &nbsp;&nbsp;&nbsp;&nbsp; 
+    <a href="{{ url_for('logout') }}"class="btn-modern" >تسجيل خروج</a>
+    </div>
+  <div id="chat-icon" onclick="toggleChat()">💬</div>
+<div id="ai-chat-container">
+    <div id="chat-header">بوت مسار الذكي</div>
+    <div id="chat-output">أهلاً ، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+    <div id="chat-input-area">
+        <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+        <button id="send-btn">إرسال</button>
+    </div>
+</div>
+  <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان CSS - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='css') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان CSS 🎨</h1>
+        <p>10 أسئلة تغطي أساسيات CSS. بالتوفيق!</p>
+        <form action="/exam/css" method="POST" class="exam-form">
+
+            <div class="question-card">
+                <p>1. أي خاصية تغير لون الخلفية؟</p>
+                <label><input type="radio" name="q1" value="1"> background-color</label>
+                <label><input type="radio" name="q1" value="0"> color</label>
+                <label><input type="radio" name="q1" value="0"> bg-color</label>
+            </div>
+
+            <div class="question-card">
+                <p>2. كيف نختار عنصر بـ id في CSS؟</p>
+                <label><input type="radio" name="q2" value="1"> #id</label>
+                <label><input type="radio" name="q2" value="0"> .id</label>
+                <label><input type="radio" name="q2" value="0"> @id</label>
+            </div>
+
+            <div class="question-card">
+                <p>3. أي خاصية تجعل النص عريضاً؟</p>
+                <label><input type="radio" name="q3" value="1"> font-weight: bold</label>
+                <label><input type="radio" name="q3" value="0"> font-style: bold</label>
+                <label><input type="radio" name="q3" value="0"> text-bold: true</label>
+            </div>
+
+            <div class="question-card">
+                <p>4. أي قيمة لـ display تجعل العناصر في صف مرن؟</p>
+                <label><input type="radio" name="q4" value="1"> flex</label>
+                <label><input type="radio" name="q4" value="0"> block</label>
+                <label><input type="radio" name="q4" value="0"> inline</label>
+            </div>
+
+            <div class="question-card">
+                <p>5. ما الخاصية المستخدمة لتغيير حجم الخط؟</p>
+                <label><input type="radio" name="q5" value="1"> font-size</label>
+                <label><input type="radio" name="q5" value="0"> text-size</label>
+                <label><input type="radio" name="q5" value="0"> font-height</label>
+            </div>
+
+            <div class="question-card">
+                <p>6. ما الخاصية المستخدمة لإضافة مسافة داخل العنصر؟</p>
+                <label><input type="radio" name="q6" value="1"> padding</label>
+                <label><input type="radio" name="q6" value="0"> margin</label>
+                <label><input type="radio" name="q6" value="0"> spacing</label>
+            </div>
+
+            <div class="question-card">
+                <p>7. ما الخاصية المستخدمة لإضافة مسافة خارج العنصر؟</p>
+                <label><input type="radio" name="q7" value="1"> margin</label>
+                <label><input type="radio" name="q7" value="0"> padding</label>
+                <label><input type="radio" name="q7" value="0"> border</label>
+            </div>
+
+            <div class="question-card">
+                <p>8. أي خاصية تُخفي عنصراً مع الاحتفاظ بمساحته؟</p>
+                <label><input type="radio" name="q8" value="1"> visibility: hidden</label>
+                <label><input type="radio" name="q8" value="0"> display: none</label>
+                <label><input type="radio" name="q8" value="0"> opacity: 0</label>
+            </div>
+
+            <div class="question-card">
+                <p>9. كيف نختار class في CSS؟</p>
+                <label><input type="radio" name="q9" value="1"> .class-name</label>
+                <label><input type="radio" name="q9" value="0"> #class-name</label>
+                <label><input type="radio" name="q9" value="0"> *class-name</label>
+            </div>
+
+            <div class="question-card">
+                <p>10. ما خاصية CSS المستخدمة لتحديد موضع العنصر؟</p>
+                <label><input type="radio" name="q10" value="1"> position</label>
+                <label><input type="radio" name="q10" value="0"> location</label>
+                <label><input type="radio" name="q10" value="0"> placement</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

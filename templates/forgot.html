@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إعادة تعيين كلمة المرور - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="register-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('auth') }}" class="btn-modern3">رجوع</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <div class="glass-container">
+        <h2>إعادة تعيين كلمة المرور</h2>
+        <p>أدخل بريدك الإلكتروني وسنرسل لك رابط إعادة التعيين</p><br>
+        <form action="{{ url_for('reset_password') }}" method="POST">
+            <div class="input-group">
+                <input type="email" name="email" placeholder="example@mail.com">
+            </div>
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الرابط</button>
+            </div>
+        </form>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

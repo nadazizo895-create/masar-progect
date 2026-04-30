@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>مسار</title>
+   <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body>
+  <header class="main-header">
+    <div class="logo-container">
+     <a href="{{ url_for('auth') }}"class="brand-name">Masar</a>
+    <img src= "{{ url_for('static',filename='image/lo.png')}}" alt="شعار" class='header-logo'>
+    </header>
+<main class="main-content">
+   <h1><p>استكشف مستقبلك التعليمي</p></h1>
+    <div class="page-preview-container">
+        <img src="{{ url_for('static',filename='image/zz.jpg')}}" alt="معاينة الصفحة" class="page-image">
+    </div>
+
+    <div class="button-row">
+        <a href="{{ url_for('about')}}" class="btn-modern">ابدأ الآن</a>
+    </div>
+</main>
+   <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>اختر مسارك</title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+   <link rel="stylesheet" href="https://code.iconify.design/1/1.0.7/iconify.min.css">
+</head>
+<body class="cv-check-page">
+<header class="main-header">
+        <div class="nav-container">
+    <a href="{{ url_for('success') }}" class="btn-modern3">رجوع</a> 
+    <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a> 
+    </div>
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class='header-logo'>
+    </header>   
+
+    <div class="cv-page-wrapper">
+
+        <!-- ═══ HERO ═══ -->
+        <div class="cv-hero">
+            <span class="cv-hero-badge"> مركز السيرة الذاتية</span>
+            <h1>اجعل سيرتك الذاتية<br>لا يمكن تجاهلها</h1>
+            <p>تعلّم كيف تبني سيرة ذاتية تفتح لك الأبواب — ثم ارفعها وسنحللها ونخبرك بالضبط ما يجب إصلاحه.</p>
+        </div>
+
+        <!-- ═══ STEPS ═══ -->
+        <div class="cv-steps">
+            <div class="cv-step">
+                <div class="step-num">1</div>
+                <div class="step-label">تعلم الأساسيات</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="cv-step">
+                <div class="step-num">2</div>
+                <div class="step-label">راجع القائمة</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="cv-step">
+                <div class="step-num">3</div>
+                <div class="step-label">ارفع سيرتك</div>
+            </div>
+            <div class="step-connector"></div>
+            <div class="cv-step">
+                <div class="step-num">4</div>
+                <div class="step-label">احصل على تحليل</div>
+            </div>
+        </div>
+
+        <!-- ═══ GOLDEN TIPS ═══ -->
+        <div class="cv-section-title"> النصائح الذهبية</div>
+        <div class="tips-grid">
+            <div class="tip-card">
+                <span class="tip-icon">💻</span>
+                <h4>التنسيق أولاً</h4>
+                <p>خط واضح، مسافات منظمة، ألوان هادئة. المحكّم يقضي 6 ثوانٍ على سيرتك — اجعلها سهلة القراءة.</p>
+            </div>
+            <div class="tip-card">
+                <span class="tip-icon">🤖</span>
+                <h4>اجتاز فلاتر ATS</h4>
+                <p>أنظمة التوظيف الآلية تفحصك أولاً. استخدم كلمات مفتاحية من إعلان الوظيفة مثل "حل المشكلات" و"العمل الجماعي".</p>
+            </div>
+            <div class="tip-card">
+                <span class="tip-icon">📞</span>
+                <h4>معلومات التواصل</h4>
+                <p>LinkedIn يعمل؟ بريدك احترافي؟ رقم هاتفك في الأعلى؟ هذه أساسيات لا اختياريات.</p>
+            </div>
+            <div class="tip-card">
+                <span class="tip-icon">📊</span>
+                <h4>أرقام لا كلام</h4>
+                <p>بدل "حسّنت المبيعات" — قل "زدت المبيعات 30% خلال 3 أشهر". الأرقام تُصدَّق فوراً.</p>
+            </div>
+            <div class="tip-card">
+                <span class="tip-icon">📏</span>
+                <h4>الطول المناسب</h4>
+                <p>أقل من 5 سنوات خبرة = صفحة واحدة فقط. أكثر = صفحتان على الأكثر. المحكّم مشغول.</p>
+            </div>
+            <div class="tip-card">
+                <span class="tip-icon">✂️</span>
+                <h4>خصصها لكل وظيفة</h4>
+                <p>لا ترسل نفس السيرة لكل مكان. غيّر الملخص وأضف كلمات من كل إعلان وظيفة بشكل خاص.</p>
+            </div>
+        </div>
+
+        <!-- ═══ BEFORE / AFTER ═══ -->
+        <div class="compare-box">
+            <div class="cv-section-title"> قبل وبعد — الفرق الحقيقي</div>
+            <div class="compare-grid">
+                <div class="compare-item bad">
+                    <div class="compare-label"> ضعيف</div>
+                    <div class="compare-text">
+                        <strong>مسؤول عن خدمة العملاء</strong><br>
+                        عملت في قسم خدمة العملاء وساعدت الزبائن في حل مشاكلهم.
+                    </div>
+                </div>
+                <div class="compare-item good">
+                    <div class="compare-label"> قوي</div>
+                    <div class="compare-text">
+                        <strong>أخصائي خدمة عملاء</strong><br>
+                        أدرت 80+ تذكرة يومياً وحققت رضا عملاء 96% — أعلى معدل في الفريق خلال 2024.
+                    </div>
+                </div>
+                <div class="compare-item bad">
+                    <div class="compare-label"> ضعيف</div>
+                    <div class="compare-text">
+                        <strong>المهارات:</strong> Excel, Word, PowerPoint, التواصل الجيد, العمل بروح الفريق
+                    </div>
+                </div>
+                <div class="compare-item good">
+                    <div class="compare-label"> قوي</div>
+                    <div class="compare-text">
+                        <strong>المهارات التقنية:</strong> Excel (Pivot Tables, VLOOKUP), SQL أساسي, Power BI<br>
+                        <strong>الناعمة:</strong> قيادة فريق 5 أشخاص, تفاوض العقود
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ CV STRUCTURE ═══ -->
+        <div class="cv-structure">
+          <span class="iconify" data-icon='mdi:file-account-outline'></span> 
+        <div>الترتيب المثالي لسيرتك الذاتية</div>
+            <p>مرر على كل قسم لمعرفة أهميته</p>
+            <div class="cv-mock" id="cvMock">
+                <div class="cv-mock-row" data-tip="أهم ما في الصفحة">
+                   <span class="iconify" data-icon=mdi:account-circle></span>
+                    <span class="cv-mock-label">الاسم والتواصل</span>
+                    <div class="cv-mock-bar"><div class="cv-mock-fill" data-w="100"></div></div>
+                    <span class="cv-mock-tip">ضروري جداً</span>
+                </div>
+                <div class="cv-mock-row" data-tip="3-4 أسطر تخبر من أنت">
+                    <span class="iconify" data-icon=mdi:text-account></span>
+                    <span class="cv-mock-label"> الملخص المهنى</span>
+                    <div class="cv-mock-bar"><div class="cv-mock-fill" data-w="90"></div></div>
+                    <span class="cv-mock-tip">عالي التأثير</span>
+                </div>
+                <div class="cv-mock-row" data-tip="من الأحدث للأقدم">
+                  <span class="iconify" data-icon="mdi:briefcase"></span>
+                    <span class="cv-mock-label">الخبرة العملية</span>
+                    <div class="cv-mock-bar"><div class="cv-mock-fill" data-w="95"></div></div>
+                    <span class="cv-mock-tip">القلب الأساسي</span>
+                </div>
+                <div class="cv-mock-row" data-tip="مهارات تقنية وناعمة">
+                    <span class="iconify" data-icon="mdi:lightbulb"></span>
+                    <span class="cv-mock-label">المهارات</span>
+                    <div class="cv-mock-bar"><div class="cv-mock-fill" data-w="80"></div></div>
+                    <span class="cv-mock-tip">مهم لـ ATS</span>
+                </div>
+                <div class="cv-mock-row" data-tip="آخر شهادة في الأعلى">
+                  <span class="iconify" data-icon="mdi:school"></span>
+                    <span class="cv-mock-label">التعليم</span>
+                    <div class="cv-mock-bar"><div class="cv-mock-fill" data-w="70"></div></div>
+                    <span class="cv-mock-tip">مهم للخريجين</span>
+                </div>
+                <div class="cv-mock-row" data-tip="مشاريع، شهادات، جوائز">
+                 <span class="iconify" data-icon="mdi:trophy"></span>
+                    <span class="cv-mock-label">الإنجازات</span>
+                    <div class="cv-mock-bar"><div class="cv-mock-fill" data-w="60"></div></div>
+                    <span class="cv-mock-tip">يُميزك</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- ═══ CHECKLIST ═══ -->
+        <div class="checklist-card">
+            <div class="cv-section-title"> قائمة التحقق قبل الإرسال</div>
+            <div class="checklist-grid" id="checklistGrid">
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">اسم واضح في الأعلى</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">بريد إلكتروني احترافي</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">رابط LinkedIn يعمل</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">ملخص أو هدف وظيفي</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">المهارات مدرجة بوضوح</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">الخبرات من الأحدث للأقدم</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">
+                    <span class="check-text">لا أخطاء إملائية</span>
+                </div>
+                <div class="check-item" onclick="toggleCheck(this)">             
+                    <span class="check-text">حجم الملف أقل من 2 ميجا</span>
+                </div>
+            </div>
+            <div class="check-progress">
+                <div class="check-progress-bar">
+                    <div class="check-progress-fill" id="progressFill"></div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- ═══ ATS SCORE DEMO ═══ -->
+        <div class="ats-widget">
+            <div class="cv-section-title"> كيف يقيّمك نظام ATS؟</div>
+            <p>أكثر من 75% من السير الذاتية ترفض تلقائياً قبل أن يراها إنسان. هل سيرتك جاهزة؟</p>
+            <div class="ats-ring-wrap" id="atsRingWrap">
+                <svg width="130" height="130" viewBox="0 0 130 130">
+                    <circle class="ats-ring-bg" cx="65" cy="65" r="50"/>
+                    <circle class="ats-ring-fill" id="atsRingFill" cx="65" cy="65" r="50"/>
+                </svg>
+                <div class="ats-score-num" id="atsScoreNum">0</div>
+            </div>
+            <div class="ats-label">نقاط ATS المتوقعة بعد تطبيق نصائح مسار</div>
+            <div class="ats-factors">
+                <span class="ats-factor good">✓ كلمات مفتاحية</span>
+                <span class="ats-factor good">✓ تنسيق قابل للقراءة</span>
+                <span class="ats-factor">⚠ تخصيص للوظيفة</span>
+                <span class="ats-factor good">✓ معلومات التواصل</span>
+                <span class="ats-factor">⚠ أقسام واضحة</span>
+            </div>
+        </div>
+
+        <!-- ═══ UPLOAD ═══ -->
+        <div class="cv-section-title"> ارفع سيرتك للتحليل</div>
+        <form method="POST" enctype="multipart/form-data">
+            <div class="upload-zone" id="uploadZone" onclick="document.getElementById('cvFileInput').click()">
+                <div class="upload-icon"></div>
+                <h3>اسحب ملفك هنا أو اضغط للاختيار</h3>
+                <p>نقبل ملفات PDF فقط — حجم أقصى 2 ميجابايت</p>
+                <input type="file" accept=".pdf" name="cv_file" id="cvFileInput" class="upload-hidden" onchange="fileChosen(this)">
+                <div class="file-chosen" id="fileChosen"><span id="fileName"></span></div>
+            </div>
+            <div style="text-align:center; margin-top:18px">
+                <button type="submit" class="btn-modern">🔍 تحليل الآن</button>
+            </div>
+        </form>
+
+        <!-- ═══ نتيجة التحليل ═══ -->
+        {% if feedback %}
+        <div class="analysis-result">
+            <div class="cv-section-title">📊 نتيجة التحليل</div>
+
+            <!-- نسبة الاكتمال -->
+            <div class="analysis-score-wrap">
+                <div class="analysis-score-label">نسبة اكتمال السيرة</div>
+                <div class="analysis-score-bar">
+                    <div class="analysis-score-fill" {{ feedback.score}} %></div>
+                </div>
+                <div class="analysis-score-num">{{ feedback.score }}%</div>
+            </div>
+
+            <!-- الموجود -->
+            <div class="analysis-section">
+                <div class="analysis-section-title">✅ الموجود في سيرتك ({{ feedback.found | length }} قسم)</div>
+                <div class="analysis-tags">
+                    {% for item in feedback.found %}
+                    <span class="analysis-tag found">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+
+            <!-- الناقص -->
+            {% if feedback.missing %}
+            <div class="analysis-section">
+                <div class="analysis-section-title">❌ الناقص ويحتاج إضافة ({{ feedback.missing | length }} قسم)</div>
+                <div class="analysis-tags">
+                    {% for item in feedback.missing %}
+                    <span class="analysis-tag missing">{{ item }}</span>
+                    {% endfor %}
+                </div>
+            </div>
+            {% endif %}
+
+            <!-- التوصيات -->
+            {% if feedback.tips %}
+            <div class="analysis-section">
+                <div class="analysis-section-title">💡 أهم التوصيات الفورية</div>
+                {% for tip in feedback.tips %}
+                <div class="analysis-tip-item">
+                    <span class="tip-check">⚡</span>
+                    <span>{{ tip }}</span>
+                </div>
+                {% endfor %}
+            </div>
+            {% endif %}
+        </div>
+        {% endif %}
+
+
+
+        <!-- ═══ JOB FORM ═══ -->
+        <div class="job-form-card" style="margin-top:40px">
+            <div class="cv-section-title"> خصص سيرتك لوظيفة معينة</div>
+            <p>أدخل تفاصيل الوظيفة وسنعطيك نصائح مخصصة تزيد فرصك.</p>
+            <form method="POST" action="{{ url_for('cv_job_tips') }}">
+                <div class="input-group">
+                    <label>المسمى الوظيفي</label>
+                    <input type="text" name="job_title" placeholder="مثال: مطور واجهة أمامية" required>
+                </div>
+                <div class="input-group">
+                    <label>اسم الشركة (اختياري)</label>
+                    <input type="text" name="company" placeholder="اسم الشركة">
+                </div>
+                <button type="submit" class="btn-modern">🎯 احصل على نصائح مخصصة</button>
+            </form>
+        </div>
+
+        <!-- ═══ نتيجة النصائح المخصصة ═══ -->
+        {% if job_tips %}
+        <div class="analysis-result" style="margin-top:30px">
+            <div class="cv-section-title">🎯 نصائح مخصصة لك</div>
+            <div style="margin-bottom:12px">
+                <strong>المسمى الوظيفي:</strong> {{ job_tips.job_title }}
+                {% if job_tips.company %}
+                &nbsp;|&nbsp; <strong>الشركة:</strong> {{ job_tips.company }}
+                {% endif %}
+            </div>
+            <div class="analysis-section">
+                {% for tip in job_tips.tips %}
+                <div class="analysis-tip-item">
+                    <span>{{ tip }}</span>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+        {% endif %}
+
+    </div><!-- end wrapper -->
+
+    <!-- AI Chat -->
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script src="https://code.iconify.design/1/1.0.7/iconify.min.js"></script>
+</body>
+</html>

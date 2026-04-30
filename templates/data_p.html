@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>مسار تحليل البيانات - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="lessonss-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('tracks') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('library_pro') }}" class="btn-modern3">المكتبة</a>
+        </div>
+        <br>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <section class="hero">
+        <h1 class="hero__title">مسار تحليل البيانات💻</h1>
+        <p class="hero__subtitle">من تنظيف البيانات الخام إلى لوحات معلومات قوية — حوّل البيانات إلى قرارات</p>
+    </section>
+
+    <section class="cards">
+        <div class="card card--popular">
+            <div class="card__header">
+                <span class="badge badge--popular">الأكثر طلباً</span>
+            </div>
+            <h2 class="card__title">Python للبيانات</h2>
+            <p class="card__desc">تحليل وتنظيف البيانات بأقوى أدوات Python.</p><br>
+            <a href="{{ url_for('lessons', slug='python') }}" class="btn-modern2">Python</a><br>
+            <a href="{{ url_for('lessons', slug='pandas') }}" class="btn-modern2">Pandas</a><br>
+            <a href="{{ url_for('lessons', slug='numpy') }}" class="btn-modern2">NumPy</a><br>
+            <a href="{{ url_for('lessons', slug='matplotlib') }}" class="btn-modern2">Matplotlib</a>
+            <ul class="card__features">
+                <li>✓ تحليل البيانات الضخمة</li>
+                <li>✓ التصور البياني</li>
+                <li>✓ التعلم الآلي</li>
+            </ul>
+          
+        </div>
+
+        <div class="card card--highlighted">
+            <div class="card__header">
+                <span class="badge badge--native">أساسي</span>
+            </div>
+            <h2 class="card__title">SQL وذكاء الأعمال</h2>
+            <p class="card__desc">استخرج رؤى قيّمة من قواعد البيانات ولوحات المعلومات.</p><br>
+            <a href="{{ url_for('lessons', slug='sql') }}" class="btn-modern2">SQL</a><br>
+            <a href="{{ url_for('lessons', slug='powerbi') }}" class="btn-modern2">Power BI</a><br>
+            <a href="{{ url_for('lessons', slug='tableau') }}" class="btn-modern2">Tableau</a>
+            <ul class="card__features">
+                <li>✓ استعلامات متقدمة</li>
+                <li>✓ لوحات تحكم تفاعلية</li>
+                <li>✓ تقارير احترافية</li>
+            </ul>
+
+        </div>
+    </section>
+
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

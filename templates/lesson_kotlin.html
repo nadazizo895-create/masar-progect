@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>دروس Kotlin - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="lessonss-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('track_detail', slug='mobile') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+            <a href="{{ url_for('library_pro') }}" class="btn-modern3">الذهاب إلى المكتبة</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <main class="course-container">
+        <div class="text-center">
+            <h1>🤖 دروس Kotlin</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6QAELgirvjs?si=NBJdQJZHeBTDOda4" title="Kotlin" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+            <h3>تطوير تطبيقات Android الأصيلة بـ Kotlin</h3>
+        </div>
+        <hr>
+        <aside class="video">
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/89VLfs-wpEY" title="Kotlin 1" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/66sjwQ-hB64" title="Kotlin 2" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/xkNpIsbxMuo" title="Kotlin 3" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/-srybsn3YDM" title="Kotlin 4" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/8sooTBY5C4w" title="Kotlin 5" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/-wdlA-wFv9A" title="Kotlin 6" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/LEJkJ0AiKDw" title="Kotlin 7" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/XE7d1OoljyI" title="Kotlin 8" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/NyOaxP-Adac" title="Kotlin 9" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/-qbGxua98To" title="Kotlin 10" frameborder="0" allowfullscreen></iframe>
+        </aside>
+    </main>
+
+    <div class="button-row">
+        <a href="{{ url_for('exam', slug='kotlin') }}" class="btn-modern">ابدأ الامتحان</a>
+    </div>
+
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

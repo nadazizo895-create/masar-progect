@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الامتحان النهائي - مسار الجوال</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>الامتحان النهائي لمسار تطوير الجوال</h1>
+        <p>لديك 8 أسئلة تغطي أساسيات تطوير تطبيقات الجوال. بالتوفيق!</p>
+
+        <form action="/exam/mobile" method="POST" class="exam-form">
+            <legend>أولاً: أسئلة Flutter</legend><br>
+
+            <div class="question">
+                <p>1. ما هي اللغة المستخدمة في تطوير تطبيقات Flutter؟</p>
+                <input type="radio" name="q1" value="1"> Dart
+                <input type="radio" name="q1" value="0"> Kotlin
+            </div><br>
+
+            <div class="question">
+                <p>2. ما هو الـ Widget الأساسي لعرض نص في Flutter؟</p>
+                <input type="radio" name="q2" value="1"> Text
+                <input type="radio" name="q2" value="0"> Label
+            </div><br>
+
+            <div class="question">
+                <p>3. أي نوع من الـ Widgets يحتوي على state قابل للتغيير؟</p>
+                <input type="radio" name="q3" value="1"> StatefulWidget
+                <input type="radio" name="q3" value="0"> StatelessWidget
+            </div><br>
+
+            <legend>ثانياً: أسئلة React Native</legend>
+            <div class="question">
+                <p>8. ما هي اللغة المستخدمة في React Native؟</p>
+                <input type="radio" name="q8" value="1"> JavaScript
+                <input type="radio" name="q8" value="0"> Swift
+            </div><br>
+
+            <div class="question">
+                <p>9. ما هو المكوّن المستخدم لعرض قائمة طويلة بكفاءة في React Native؟</p>
+                <input type="radio" name="q9" value="1"> FlatList
+                <input type="radio" name="q9" value="0"> ScrollList
+            </div><br>
+
+            <div class="question">
+                <p>10. أي أمر يُستخدم لإنشاء مشروع React Native جديد؟</p>
+                <input type="radio" name="q10" value="1"> npx react-native init
+                <input type="radio" name="q10" value="0"> npm create react-native
+            </div><br>
+
+            <legend>ثالثاً: أسئلة عامة في الجوال</legend><br>
+            <div class="question">
+                <p>15. ما هي المنصة التي تستخدم Swift كلغة برمجة أساسية؟</p>
+                <input type="radio" name="q15" value="1"> iOS
+                <input type="radio" name="q15" value="0"> Android
+            </div><br>
+
+            <div class="question">
+                <p>16. ما هي اللغة الرسمية الموصى بها لتطوير تطبيقات Android؟</p>
+                <input type="radio" name="q16" value="1"> Kotlin
+                <input type="radio" name="q16" value="0"> Java
+            </div><br>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

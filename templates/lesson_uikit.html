@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>دروس UIKit 🍎 - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="lessonss-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('track_detail', slug='mobile') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+             <a href="{{ url_for('library_pro') }}" class="btn-modern3">الذهاب إلى المكتبة</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <main class="course-container">
+        <div class="text-center">
+            <h1>دروس UIKit 🍎</h1>
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6QAELgirvjs" title="UIKit 🍎" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+        <hr>
+        <aside class="video">
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/7LxA9qXUY5k" title="1" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/QG5aEmS9Fu0" title="2" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/dVgTBEYCseU" title="3" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/3lXuWHtm7PM" title="4" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/sBFemL2Mfj4" title="5" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/XxkX8wnRq3s" title="6" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/S58smWj5Yn0" title="7" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/Fpibp-291xQ" title="8" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/nCpNsMgyzh4" title="9" frameborder="0" allowfullscreen></iframe>
+            <iframe width="120" height="120" src="https://www.youtube.com/embed/zhwqvfoi50Q" title="10" frameborder="0" allowfullscreen></iframe>
+        </aside>
+    </main>
+    <div class="button-row">
+        <a href="{{ url_for('exam', slug='uikit') }}" class="btn-modern">ابدأ الامتحان</a>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

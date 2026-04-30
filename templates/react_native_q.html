@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان React Native - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='react_native') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان React Native </h1>
+        <p>10 أسئلة تغطي أساسيات React Native. بالتوفيق!</p>
+        <form action="/exam/react_native" method="POST" class="exam-form">
+
+            <div class="question-card">
+                <p>1. ما اللغة المستخدمة في React Native؟</p>
+                <label><input type="radio" name="q1" value="1"> JavaScript</label>
+                <label><input type="radio" name="q1" value="0"> Swift</label>
+                <label><input type="radio" name="q1" value="0"> Dart</label>
+            </div>
+
+            <div class="question-card">
+                <p>2. ما المكوّن لعرض قائمة طويلة بكفاءة؟</p>
+                <label><input type="radio" name="q2" value="1"> FlatList</label>
+                <label><input type="radio" name="q2" value="0"> ScrollList</label>
+                <label><input type="radio" name="q2" value="0"> ListView</label>
+            </div>
+
+            <div class="question-card">
+                <p>3. ما الأمر لإنشاء مشروع React Native جديد؟</p>
+                <label><input type="radio" name="q3" value="1"> npx react-native init</label>
+                <label><input type="radio" name="q3" value="0"> npm create react-native</label>
+                <label><input type="radio" name="q3" value="0"> yarn start react-native</label>
+            </div>
+
+            <div class="question-card">
+                <p>4. ما المكوّن لعرض نص في React Native؟</p>
+                <label><input type="radio" name="q4" value="1"> &lt;Text&gt;</label>
+                <label><input type="radio" name="q4" value="0"> &lt;p&gt;</label>
+                <label><input type="radio" name="q4" value="0"> &lt;Label&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>5. ما المكوّن للتخطيط بدلاً من div؟</p>
+                <label><input type="radio" name="q5" value="1"> &lt;View&gt;</label>
+                <label><input type="radio" name="q5" value="0"> &lt;div&gt;</label>
+                <label><input type="radio" name="q5" value="0"> &lt;Box&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>6. كيف نضيف أنماط تنسيق في React Native؟</p>
+                <label><input type="radio" name="q6" value="1"> StyleSheet.create()</label>
+                <label><input type="radio" name="q6" value="0"> CSS.create()</label>
+                <label><input type="radio" name="q6" value="0"> Style.new()</label>
+            </div>
+
+            <div class="question-card">
+                <p>7. ما الـ Hook المستخدم لإدارة الحالة؟</p>
+                <label><input type="radio" name="q7" value="1"> useState</label>
+                <label><input type="radio" name="q7" value="0"> useData</label>
+                <label><input type="radio" name="q7" value="0"> useVariable</label>
+            </div>
+
+            <div class="question-card">
+                <p>8. ما المكوّن لعرض صورة؟</p>
+                <label><input type="radio" name="q8" value="1"> &lt;Image&gt;</label>
+                <label><input type="radio" name="q8" value="0"> &lt;img&gt;</label>
+                <label><input type="radio" name="q8" value="0"> &lt;Photo&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>9. ما المكوّن للتمرير؟</p>
+                <label><input type="radio" name="q9" value="1"> &lt;ScrollView&gt;</label>
+                <label><input type="radio" name="q9" value="0"> &lt;Scroll&gt;</label>
+                <label><input type="radio" name="q9" value="0"> &lt;SwipeView&gt;</label>
+            </div>
+
+            <div class="question-card">
+                <p>10. ما المكوّن للضغط والتفاعل؟</p>
+                <label><input type="radio" name="q10" value="1"> &lt;TouchableOpacity&gt;</label>
+                <label><input type="radio" name="q10" value="0"> &lt;Button&gt;</label>
+                <label><input type="radio" name="q10" value="0"> &lt;Clickable&gt;</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

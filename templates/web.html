@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>تفاصيل المسار - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}"> 
+</head>
+<body class="lessonss-page">
+        <header class="main-header">
+     <div class="nav-container">
+    <a href="{{ url_for('tracks') }}" class="btn-modern3">رجوع</a> 
+    <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a> 
+    </div>
+          <div class="logo-container">
+              <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+              <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class='header-logo'>
+       </header>
+  <section class="hero">
+    <h1 class="hero__title">مسار تطوير الويب</h1>
+    <p class="hero__subtitle">
+      اختر مسارك في تطوير الويب. من واجهات أمامية رائعة إلى خوادم خلفية قوية
+      — ابدأ البناء للويب اليوم.
+    </p>
+  </section>
+
+  <section class="cards">
+
+    <!-- البطاقة الأولى -->
+    <div class="card card--popular">
+      <div class="card__header">
+        <span class="badge badge--popular">الأكثر طلباً</span>
+        <div class="card__icons.">
+          <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M4 6h16v2H4zm0 5h16v2H4zm0 5h16v2H4z"/></svg>
+        </div>
+      </div>
+      <h2 class="card__title">تطوير الواجهة الأمامية</h2>
+      <p class="card__desc">ابنِ مواقع جميلة ومتجاوبة يحبها المستخدمون.</p><br>
+          <a href="{{ url_for('lessons', slug='html') }}" class="btn-modern2">HTML</a><br>
+        <span class="btn-modern2">css</span><br>
+       <span class="btn-modern2">JS</span><br>
+        <span class="btn-modern2">React</span>
+      <ul class="card__features">
+        <li>✓ تصميم متجاوب</li>
+        <li>✓ أطر عمل حديثة للواجهة</li>
+        <li>✓ طلب مرتفع في سوق العمل</li>
+      </ul>
+    </div>
+    <!-- البطاقة الثانية -->
+    <div class="card card--highlighted">
+      <div class="card__header">
+        <span class="badge badge--native">أساسي</span>
+        <div class="card__icons">
+          <svg width="22" height="22" fill="white" viewBox="0 0 24 24"><path d="M20 3H4v10c0 2.21 1.79 4 4 4h6c2.21 0 4-1.79 4-4v-3h2c1.11 0 2-.89 2-2V5c0-1.11-.89-2-2-2zm0 5h-2V5h2v3zM4 19h16v2H4z"/></svg>
+        </div>
+      </div>
+      <h2 class="card__title">تطوير الخادم الخلفي</h2>
+      <p class="card__desc">شغّل تطبيقاتك بمنطق خادم قوي وموثوق.</p><br>
+        <span class="btn-modern2">Node.js</span><br>
+        <span class="btn-modern2">Python</span><br>
+        <span class="btn-modern2">PHP</span><br>
+        <span class="btn-modern2">SQL</span><br>
+        <span class="btn-modern2">Firebase</span>
+      <ul class="card__features">
+        <li>✓ تطوير REST API</li>
+        <li>✓ إدارة قواعد البيانات</li>
+        <li>✓ نشر على الخادم والسحابة</li>
+      </ul><br>
+    </div>
+  </section>
+  <br><br>
+      <button id="chat-toggle-btn">💬</button>
+
+<div id="chat-icon" onclick="toggleChat()">💬</div>
+
+<div id="ai-chat-container">
+    <div id="chat-header">بوت مسار الذكي</div>
+    <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+    <div id="chat-input-area">
+        <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+        <button id="send-btn">إرسال</button>
+    </div>
+</div>
+  <script src="{{ url_for('static',filename='js/script.js')}}"></script> 
+</body>
+</html>

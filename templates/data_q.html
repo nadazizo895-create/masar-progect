@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الامتحان النهائي - مسار الجوال</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+            <a href="{{ url_for('library_pro') }}" class="btn-modern3">المكتبة</a>
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>الامتحان النهائي jj للمسار</h1>
+        <p>لديك 20 سؤالاً تغطي أساسيات الويب. بالتوفيق!</p>
+
+        <form action="/exam/data" method="POST" class="exam-form">
+            <legend>أولاً: أسئلة HTML</legend><br>
+
+            <div class="question">
+                <p>1. ما هو الوسم الصحيح لأكبر عنوان؟</p>
+                <input type="radio" name="q1" value="1"> h1
+                <input type="radio" name="q1" value="0"> h6
+            </div><br>
+
+            <div class="question">
+                <p>2. كيف نفتح رابطاً في علامة تبويب جديدة؟</p>
+                <input type="radio" name="q2" value="1"> target="_blank"
+                <input type="radio" name="q2" value="0"> target="new"
+            </div><br>
+
+            <div class="question">
+                <p>3. أي وسم يستخدم لإضافة سطر جديد؟</p>
+                <input type="radio" name="q3" value="1"> &lt;br&gt;
+                <input type="radio" name="q3" value="0"> &lt;lb&gt;
+            </div><br>
+
+            <legend>ثانياً: أسئلة CSS</legend>
+            <div class="question">
+                <p>8. أي خاصية تغير لون الخلفية؟</p>
+                <input type="radio" name="q8" value="1"> background-color
+                <input type="radio" name="q8" value="0"> color
+            </div><br>
+
+            <div class="question">
+                <p>9. كيف نختار عنصر بـ id معين؟</p>
+                <input type="radio" name="q9" value="1"> استخدام العلامة (#)
+                <input type="radio" name="q9" value="0"> استخدام العلامة (.)
+            </div><br>
+
+            <div class="question">
+                <p>10. أي خاصية تجعل النص عريضاً (Bold)؟</p>
+                <input type="radio" name="q10" value="1"> font-weight
+                <input type="radio" name="q10" value="0"> font-style
+            </div><br>
+
+            <legend>ثالثاً: أسئلة JavaScript</legend><br>
+            <div class="question">
+                <p>15. كيف نكتب رسالة تحذير (Alert)؟</p>
+                <input type="radio" name="q15" value="1"> alert("Hello");
+                <input type="radio" name="q15" value="0"> msg("Hello");
+            </div><br>
+
+            <div class="question">
+                <p>16. أي علامة تستخدم للمساواة في القيم والنوع؟</p>
+                <input type="radio" name="q16" value="1"> ===
+                <input type="radio" name="q16" value="0"> =
+            </div><br>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>اختر مسارك</title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="lessonss-page">
+    <header class="main-header">
+        <div class="nav-container">
+    <a href="{{ url_for('choice') }}" class="btn-modern3">رجوع</a> 
+    <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a> 
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class='header-logo'>
+    </header>   
+    <br><br><br> 
+       <div class="button-row">
+  </div>
+        <h1>مسارات التعلم المتاحة</h1>
+        <h5>بناءً على اهتماماتك، اختر التخصص الذي تريد إتقانه</h5>
+        <div class="choices-container">
+            <div class="option-circle">
+             <h1>تطوير الويب</h1>
+            <h5>تعلم كيفية بناء المواقع الإلكترونية</h5><br>
+            <a href="{{ url_for('web_track') }}" class="btn-modern">استكشف</a>
+        </div>
+
+        <hr>
+
+        <div class="option-circle">
+            <h1>تطبيقات الجوال</h1>
+            <h5>ابنِ تطبيقات لأندرويد وiOS</h5>
+                        &nbsp;&nbsp;&nbsp;&nbsp; 
+         <a href="{{ url_for('mobile_track') }}" class="btn-modern">استكشف</a>
+        
+        </div>
+
+        <hr>
+
+        <div class="option-circle">
+            <h1>تحليل البيانات</h1>
+            <h5>تعلم كيفية فهم البيانات واستخراج رؤى قيّمة منها</h5><br>
+            <a href="{{ url_for('data_track') }}" class="btn-modern">استكشف</a>
+        </div>
+    <br>
+   <div id="chat-icon" onclick="toggleChat()">💬</div>
+ <div id="ai-chat-container">
+    <div id="chat-header">بوت مسار الذكي</div>
+    <div id="chat-output">أهلاً ، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+    <div id="chat-input-area">
+        <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+        <button id="send-btn">إرسال</button>
+    </div>
+    <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

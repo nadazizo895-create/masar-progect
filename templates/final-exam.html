@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>الاختبار النهائي - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='web') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+
+    <div class="main-content">
+        <h1>الامتحان النهائي للمسار</h1>
+        <p>لديك 20 سؤالاً تغطي أساسيات الويب. بالتوفيق!</p>
+
+        <form action="/exam/web" method="POST">
+            <legend>أولاً: أسئلة HTML</legend><br>
+
+            <div class="question-card">
+                <p>1. ما هو الوسم الصحيح لأكبر عنوان؟</p>
+                <label><input type="radio" name="q1" value="1"> h1</label>
+                <label><input type="radio" name="q1" value="0"> h6</label>
+            </div>
+
+            <div class="question-card">
+                <p>2. كيف نفتح رابطاً في علامة تبويب جديدة؟</p>
+                <label><input type="radio" name="q2" value="1"> target="_blank"</label>
+                <label><input type="radio" name="q2" value="0"> target="new"</label>
+            </div>
+
+            <div class="question-card">
+                <p>3. أي وسم يستخدم لإضافة سطر جديد؟</p>
+                <label><input type="radio" name="q3" value="1"> &lt;br&gt;</label>
+                <label><input type="radio" name="q3" value="0"> &lt;lb&gt;</label>
+            </div>
+
+            <legend>ثانياً: أسئلة CSS</legend><br>
+
+            <div class="question-card">
+                <p>8. أي خاصية تغير لون الخلفية؟</p>
+                <label><input type="radio" name="q8" value="1"> background-color</label>
+                <label><input type="radio" name="q8" value="0"> color</label>
+            </div>
+
+            <div class="question-card">
+                <p>9. كيف نختار عنصر بـ id معين؟</p>
+                <label><input type="radio" name="q9" value="1"> استخدام العلامة (#)</label>
+                <label><input type="radio" name="q9" value="0"> استخدام العلامة (.)</label>
+            </div>
+
+            <div class="question-card">
+                <p>10. أي خاصية تجعل النص عريضاً (Bold)؟</p>
+                <label><input type="radio" name="q10" value="1"> font-weight</label>
+                <label><input type="radio" name="q10" value="0"> font-style</label>
+            </div>
+
+            <legend>ثالثاً: أسئلة JavaScript</legend><br>
+
+            <div class="question-card">
+                <p>15. كيف نكتب رسالة تحذير (Alert)؟</p>
+                <label><input type="radio" name="q15" value="1"> alert("Hello");</label>
+                <label><input type="radio" name="q15" value="0"> msg("Hello");</label>
+            </div>
+
+            <div class="question-card">
+                <p>16. أي علامة تستخدم للمساواة في القيم والنوع؟</p>
+                <label><input type="radio" name="q16" value="1"> ===</label>
+                <label><input type="radio" name="q16" value="0"> =</label>
+            </div>
+
+            <div class="button-row">
+                <button type="submit" class="btn-modern">النتيجة</button>
+            </div>
+        </form>
+    </div>
+
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي. كيف يمكنني مساعدتك؟</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
+  

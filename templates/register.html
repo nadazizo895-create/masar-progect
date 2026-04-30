@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إنشاء حساب</title>
+   <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="register-page">
+    <header class="main-header">
+     <div class="nav-container">
+    <a href="{{ url_for('auth') }}" class="btn-modern3">رجوع</a> 
+    </div>
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+   <img src="{{ url_for('static',filename='image/lo.png')}}" alt="شعار" class='header-logo'>
+    </header>  
+       <div class="glass-container">
+        <h2>إنشاء حساب جديد</h2>
+        <p>مرحباً بك في مسار، من فضلك أدخل بياناتك</p><br>
+
+        <form action="/register" method="POST">
+            <div class="input-group">
+                <input type="text" name="full_name" placeholder="الاسم الكامل" required>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            </div>
+            <div class="input-group">
+                <input type="email" name="email2" placeholder="تأكيد البريد الإلكتروني" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="كلمة المرور" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password2" placeholder="تأكيد كلمة المرور" required>
+            </div>
+
+            <button type="submit" class="btn-modern">إنشاء حساب</button>
+        </form>
+<br>
+      <p><a href="{{ url_for('auth') }}" class="btn-modern3">تسجيل الدخول</a></p>
+    </div>
+       
+    <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html

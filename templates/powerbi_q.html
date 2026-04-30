@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Power BI - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='powerbi') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان Power BI 📊</h1>
+        <p>10 أسئلة تغطي أساسيات Power BI. بالتوفيق!</p>
+        <form action="/exam/powerbi" method="POST" class="exam-form">
+            <div class="question-card"><p>1. من طوّر Power BI؟</p>
+                <label><input type="radio" name="q1" value="1"> Microsoft</label>
+                <label><input type="radio" name="q1" value="0"> Google</label>
+                <label><input type="radio" name="q1" value="0"> Salesforce</label></div>
+            <div class="question-card"><p>2. ما لغة الصيغ في Power BI؟</p>
+                <label><input type="radio" name="q2" value="1"> DAX</label>
+                <label><input type="radio" name="q2" value="0"> SQL</label>
+                <label><input type="radio" name="q2" value="0"> Python</label></div>
+            <div class="question-card"><p>3. ما الملف الافتراضي لمشروع Power BI؟</p>
+                <label><input type="radio" name="q3" value="1"> .pbix</label>
+                <label><input type="radio" name="q3" value="0"> .pbi</label>
+                <label><input type="radio" name="q3" value="0"> .xlsx</label></div>
+            <div class="question-card"><p>4. ما أداة تنظيف البيانات في Power BI؟</p>
+                <label><input type="radio" name="q4" value="1"> Power Query</label>
+                <label><input type="radio" name="q4" value="0"> Data Cleaner</label>
+                <label><input type="radio" name="q4" value="0"> Query Editor</label></div>
+            <div class="question-card"><p>5. ما المخطط المستخدم لمقارنة القيم؟</p>
+                <label><input type="radio" name="q5" value="1"> Bar Chart</label>
+                <label><input type="radio" name="q5" value="0"> Pie Chart</label>
+                <label><input type="radio" name="q5" value="0"> Line Chart</label></div>
+            <div class="question-card"><p>6. ما دالة DAX لحساب المجموع؟</p>
+                <label><input type="radio" name="q6" value="1"> SUM()</label>
+                <label><input type="radio" name="q6" value="0"> TOTAL()</label>
+                <label><input type="radio" name="q6" value="0"> ADD()</label></div>
+            <div class="question-card"><p>7. ما المخطط الأنسب لإظهار النسب؟</p>
+                <label><input type="radio" name="q7" value="1"> Pie Chart</label>
+                <label><input type="radio" name="q7" value="0"> Bar Chart</label>
+                <label><input type="radio" name="q7" value="0"> Scatter Chart</label></div>
+            <div class="question-card"><p>8. ما خدمة نشر التقارير في Power BI؟</p>
+                <label><input type="radio" name="q8" value="1"> Power BI Service</label>
+                <label><input type="radio" name="q8" value="0"> Power BI Cloud</label>
+                <label><input type="radio" name="q8" value="0"> Power BI Online</label></div>
+            <div class="question-card"><p>9. كيف نربط جدولين في Power BI؟</p>
+                <label><input type="radio" name="q9" value="1"> Relationships (علاقات)</label>
+                <label><input type="radio" name="q9" value="0"> JOIN</label>
+                <label><input type="radio" name="q9" value="0"> Merge</label></div>
+            <div class="question-card"><p>10. ما دالة DAX للمتوسط؟</p>
+                <label><input type="radio" name="q10" value="1"> AVERAGE()</label>
+                <label><input type="radio" name="q10" value="0"> MEAN()</label>
+                <label><input type="radio" name="q10" value="0"> AVG()</label></div>
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

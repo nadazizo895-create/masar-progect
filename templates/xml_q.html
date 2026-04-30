@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان XML - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='xml') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان XML </h1>
+        <p>10 أسئلة تغطي أساسيات XML. بالتوفيق!</p>
+        <form action="/exam/xml" method="POST" class="exam-form">
+            <div class="question-card"><p>1. ما اختصار XML؟</p>
+                <label><input type="radio" name="q1" value="1"> eXtensible Markup Language</label>
+                <label><input type="radio" name="q1" value="0"> Extra Markup Language</label>
+                <label><input type="radio" name="q1" value="0"> Extended Meta Language</label></div>
+            <div class="question-card"><p>2. كيف نكتب تعليقاً في XML؟</p>
+                <label><input type="radio" name="q2" value="1"> <!-- تعليق --></label>
+                <label><input type="radio" name="q2" value="0"> // تعليق</label>
+                <label><input type="radio" name="q2" value="0"> # تعليق</label></div>
+            <div class="question-card"><p>3. ما السمة لتعريف اتجاه النص في Android XML؟</p>
+                <label><input type="radio" name="q3" value="1"> android:layout_width</label>
+                <label><input type="radio" name="q3" value="0"> android:text</label>
+                <label><input type="radio" name="q3" value="0"> android:gravity</label></div>
+            <div class="question-card"><p>4. ما العنصر الجذري في ملف Layout بـ Android؟</p>
+                <label><input type="radio" name="q4" value="1"> ViewGroup أو View</label>
+                <label><input type="radio" name="q4" value="0"> Root</label>
+                <label><input type="radio" name="q4" value="0"> Main</label></div>
+            <div class="question-card"><p>5. كيف نضبط عرض عنصر ليملأ الشاشة؟</p>
+                <label><input type="radio" name="q5" value="1"> match_parent</label>
+                <label><input type="radio" name="q5" value="0"> fill_all</label>
+                <label><input type="radio" name="q5" value="0"> wrap_screen</label></div>
+            <div class="question-card"><p>6. كيف نضبط حجم العنصر ليناسب محتواه؟</p>
+                <label><input type="radio" name="q6" value="1"> wrap_content</label>
+                <label><input type="radio" name="q6" value="0"> auto_size</label>
+                <label><input type="radio" name="q6" value="0"> fit_content</label></div>
+            <div class="question-card"><p>7. ما الـ Widget لعرض نص في Android XML؟</p>
+                <label><input type="radio" name="q7" value="1"> TextView</label>
+                <label><input type="radio" name="q7" value="0"> TextBox</label>
+                <label><input type="radio" name="q7" value="0"> Label</label></div>
+            <div class="question-card"><p>8. ما الـ Widget لإدخال نص في Android XML؟</p>
+                <label><input type="radio" name="q8" value="1"> EditText</label>
+                <label><input type="radio" name="q8" value="0"> InputField</label>
+                <label><input type="radio" name="q8" value="0"> TextInput</label></div>
+            <div class="question-card"><p>9. ما الـ Widget للضغط في Android XML؟</p>
+                <label><input type="radio" name="q9" value="1"> Button</label>
+                <label><input type="radio" name="q9" value="0"> PressButton</label>
+                <label><input type="radio" name="q9" value="0"> ClickView</label></div>
+            <div class="question-card"><p>10. ما السمة لتحديد نص العنصر في Android XML؟</p>
+                <label><input type="radio" name="q10" value="1"> android:text</label>
+                <label><input type="radio" name="q10" value="0"> android:value</label>
+                <label><input type="radio" name="q10" value="0"> android:label</label></div>
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

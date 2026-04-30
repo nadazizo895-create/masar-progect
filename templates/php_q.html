@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان PHP - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='php') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان PHP 🐘</h1>
+        <p>10 أسئلة تغطي أساسيات PHP. بالتوفيق!</p>
+        <form action="/exam/php" method="POST" class="exam-form">
+            <div class="question-card"><p>1. كيف نبدأ كود PHP؟</p>
+                <label><input type="radio" name="q1" value="1"> &lt;?php</label>
+                <label><input type="radio" name="q1" value="0"> &lt;php&gt;</label>
+                <label><input type="radio" name="q1" value="0"> #php</label></div>
+            <div class="question-card"><p>2. كيف نطبع نصاً في PHP؟</p>
+                <label><input type="radio" name="q2" value="1"> echo</label>
+                <label><input type="radio" name="q2" value="0"> print()</label>
+                <label><input type="radio" name="q2" value="0"> console.log()</label></div>
+            <div class="question-card"><p>3. كيف نعرّف متغيراً في PHP؟</p>
+                <label><input type="radio" name="q3" value="1"> $variable</label>
+                <label><input type="radio" name="q3" value="0"> var variable</label>
+                <label><input type="radio" name="q3" value="0"> let variable</label></div>
+            <div class="question-card"><p>4. ما امتداد ملفات PHP؟</p>
+                <label><input type="radio" name="q4" value="1"> .php</label>
+                <label><input type="radio" name="q4" value="0"> .ph</label>
+                <label><input type="radio" name="q4" value="0"> .php5</label></div>
+            <div class="question-card"><p>5. كيف نعرّف دالة في PHP؟</p>
+                <label><input type="radio" name="q5" value="1"> function myFunc() {}</label>
+                <label><input type="radio" name="q5" value="0"> def myFunc() {}</label>
+                <label><input type="radio" name="q5" value="0"> fun myFunc() {}</label></div>
+            <div class="question-card"><p>6. ما الطريقة لاستقبال بيانات Form في PHP؟</p>
+                <label><input type="radio" name="q6" value="1"> $_POST</label>
+                <label><input type="radio" name="q6" value="0"> request.post</label>
+                <label><input type="radio" name="q6" value="0"> form.data</label></div>
+            <div class="question-card"><p>7. كيف نربط PHP بقاعدة بيانات MySQL؟</p>
+                <label><input type="radio" name="q7" value="1"> mysqli_connect()</label>
+                <label><input type="radio" name="q7" value="0"> db.connect()</label>
+                <label><input type="radio" name="q7" value="0"> mysql.open()</label></div>
+            <div class="question-card"><p>8. ما علامة التعليق في PHP؟</p>
+                <label><input type="radio" name="q8" value="1"> //</label>
+                <label><input type="radio" name="q8" value="0"> ##</label>
+                <label><input type="radio" name="q8" value="0"> **</label></div>
+            <div class="question-card"><p>9. كيف نعرّف مصفوفة في PHP؟</p>
+                <label><input type="radio" name="q9" value="1"> $arr = array(1,2,3);</label>
+                <label><input type="radio" name="q9" value="0"> arr = [1,2,3]</label>
+                <label><input type="radio" name="q9" value="0"> var arr = {1,2,3}</label></div>
+            <div class="question-card"><p>10. ما الـ superglobal للوصول لمتغيرات الجلسة؟</p>
+                <label><input type="radio" name="q10" value="1"> $_SESSION</label>
+                <label><input type="radio" name="q10" value="0"> $session</label>
+                <label><input type="radio" name="q10" value="0"> session()</label></div>
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

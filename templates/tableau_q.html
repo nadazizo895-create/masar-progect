@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان Tableau - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='tableau') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان Tableau </h1>
+        <p>10 أسئلة تغطي أساسيات Tableau. بالتوفيق!</p>
+        <form action="/exam/tableau" method="POST" class="exam-form">
+            <div class="question-card"><p>1. ما الشركة المطوّرة لـ Tableau؟</p>
+                <label><input type="radio" name="q1" value="1"> Salesforce</label>
+                <label><input type="radio" name="q1" value="0"> Microsoft</label>
+                <label><input type="radio" name="q1" value="0"> Google</label></div>
+            <div class="question-card"><p>2. ما امتداد ملف مشروع Tableau؟</p>
+                <label><input type="radio" name="q2" value="1"> .twb أو .twbx</label>
+                <label><input type="radio" name="q2" value="0"> .tab</label>
+                <label><input type="radio" name="q2" value="0"> .tableau</label></div>
+            <div class="question-card"><p>3. ما نوع الاتصال بالبيانات الأسرع في Tableau؟</p>
+                <label><input type="radio" name="q3" value="1"> Extract</label>
+                <label><input type="radio" name="q3" value="0"> Live</label>
+                <label><input type="radio" name="q3" value="0"> Direct</label></div>
+            <div class="question-card"><p>4. ما الـ View الافتراضي لبناء المخططات؟</p>
+                <label><input type="radio" name="q4" value="1"> Sheet</label>
+                <label><input type="radio" name="q4" value="0"> Dashboard</label>
+                <label><input type="radio" name="q4" value="0"> Story</label></div>
+            <div class="question-card"><p>5. ما الوظيفة لحساب مجموع قيم حقل؟</p>
+                <label><input type="radio" name="q5" value="1"> SUM()</label>
+                <label><input type="radio" name="q5" value="0"> TOTAL()</label>
+                <label><input type="radio" name="q5" value="0"> ADD()</label></div>
+            <div class="question-card"><p>6. ما الـ Chart الأنسب لمقارنة القيم عبر الزمن؟</p>
+                <label><input type="radio" name="q6" value="1"> Line Chart</label>
+                <label><input type="radio" name="q6" value="0"> Pie Chart</label>
+                <label><input type="radio" name="q6" value="0"> Bar Chart</label></div>
+            <div class="question-card"><p>7. ما لوحة جمع عدة مخططات معاً؟</p>
+                <label><input type="radio" name="q7" value="1"> Dashboard</label>
+                <label><input type="radio" name="q7" value="0"> Story</label>
+                <label><input type="radio" name="q7" value="0"> Sheet</label></div>
+            <div class="question-card"><p>8. كيف نربط Tableau بـ Excel؟</p>
+                <label><input type="radio" name="q8" value="1"> Connect to Data > Microsoft Excel</label>
+                <label><input type="radio" name="q8" value="0"> Import > Excel</label>
+                <label><input type="radio" name="q8" value="0"> File > Open Excel</label></div>
+            <div class="question-card"><p>9. ما الوظيفة لحساب المتوسط في Tableau؟</p>
+                <label><input type="radio" name="q9" value="1"> AVG()</label>
+                <label><input type="radio" name="q9" value="0"> MEAN()</label>
+                <label><input type="radio" name="q9" value="0"> AVERAGE()</label></div>
+            <div class="question-card"><p>10. ما خدمة نشر التقارير في Tableau؟</p>
+                <label><input type="radio" name="q10" value="1"> Tableau Server / Tableau Public</label>
+                <label><input type="radio" name="q10" value="0"> Tableau Cloud</label>
+                <label><input type="radio" name="q10" value="0"> Tableau Online</label></div>
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

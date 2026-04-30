@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>الملف الشخصي — مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="cv-check-page">
+
+    <!-- Header -->
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('index') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('logout') }}" class="btn-modern3">تسجيل خروج</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static',filename='image/lo.png')}}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <!-- Avatar Row -->
+    <div class="profile-card">
+        <div class="avatar-row">
+            <div class="avatar-wrap">
+                <img
+                    id="profile-avatar"
+                    class="profile-avatar"
+                    src="{% if current_user.avatar %}{{ url_for('static', filename='uploads/' + current_user.avatar) }}{% else %}data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='110' height='110' viewBox='0 0 110 110'%3E%3Ccircle cx='55' cy='55' r='55' fill='%23e0deff'/%3E%3Ccircle cx='55' cy='42' r='20' fill='%236c63ff'/%3E%3Cellipse cx='55' cy='95' rx='32' ry='22' fill='%236c63ff'/%3E%3C/svg%3E{% endif %}"
+                    alt="صورة الطالب"
+                />
+                <label for="avatar-input" class="avatar-edit-btn" title="تغيير الصورة">💻</label>
+                <input type="file" id="avatar-input" accept="image/*">
+            </div>
+
+            <div class="profile-meta">
+                <h1 id="student-name">{{ current_user.full_name }}</h1>
+                <p class="handle">@{{ current_user.username if current_user and current_user.username else (current_user.email.split('@')[0] if current_user and current_user.email else '') }}</p>
+                <div class="badges-inline">
+                    <span class="pill active"> نشط</span>
+                    <span class="pill"> عضو منذ {{ current_user.joined_at[:7] if current_user.joined_at else "—" }}</span>
+                    {% if current_user.is_paid %}
+                    <span class="pill"> مشترك</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="profile-actions">
+                <button class="btn-edit" id="open-edit-modal">✏️ تعديل الملف</button>
+            </div>
+            <a href="{{ url_for('admin_panel') }}" class="btn-modern3">تحكم</a>
+        </div>
+        <hr class="profile-divider">
+    </div>
+
+    <!-- Body -->
+    <div class="profile-body">
+
+        <!-- Sidebar -->
+        <aside class="sidebar">
+
+            <div class="sidebar-card">
+                <h3>معلومات</h3>
+                <div class="info-row"><span class="icon"></span> <span id="disp-email">{{ current_user.email }}</span></div>
+                <div class="info-row"><span class="icon"></span> <span id="disp-city">{{ current_user.city or '—' }}</span></div>
+                <div class="info-row"><span class="icon"></span> <span id="disp-level">{{ current_user.level or '—' }}</span></div>
+                <div class="info-row"><span class="icon"></span> <span id="disp-goal">{{ current_user.goal or '—' }}</span></div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>المهارات</h3>
+                <div id="skills-container">
+                    {% if current_user.skills %}
+                        {% for sk in current_user.skills.split(',') %}
+                            <span class="skill-tag">{{ sk.strip() }}</span>
+                        {% endfor %}
+                    {% else %}
+                        <span>لم تُضَف مهارات بعد</span>
+                    {% endif %}
+                </div>
+            </div>
+
+            <div class="sidebar-card">
+                <h3>المتصدّرون</h3>
+                <div id="leaderboard-list">
+                    <div>جاري التحميل…</div>
+                </div>
+            </div>
+
+        </aside>
+
+        <!-- Main Column -->
+        <div class="main-col">
+
+            <!-- Stats -->
+            <div class="section-card">
+                <h2><span class="sec-icon"></span> إحصائياتك</h2>
+                <div class="stats-grid">
+                    <div class="stat-box">
+                        <span class="stat-icon"></span>
+                        <span class="stat-value" id="card__desc">{{ videos_watched }}</span>
+                        <span class="stat-label">فيديو شاهدته</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon"></span>
+                        <span class="stat-value" id="exam-done">{{ exams_done }}</span>
+                        <span class="stat-label">اختبار أكملته</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon"></span>
+                        <span class="stat-value" id="avg-score">{{ avg_score }}%</span>
+                        <span class="stat-label">المعدل التراكمي</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon"></span>
+                        <span class="stat-value" id="streak-days">{{ streak_days }}</span>
+                        <span class="stat-label">أيام متواصلة</span>
+                    </div>
+                    <div class="stat-box">
+                        <span class="stat-icon"></span>
+                        <span class="stat-value" id="badges-count">{{ badges_count }}</span>
+                        <span class="stat-label">شارة حصلت عليها</span>
+                    </div>
+                </div>
+            </div>
+
+        <div class="section-card">
+    <h2><span class="sec-icon"></span> تقدمك في المسارات</h2>
+    
+    {% if tracks_p %}
+        {% for track in tracks_p %}
+        <div class="track-row">
+            <div class="track-header">
+                <p>{{ track.name_ar }}</p>
+                <span>{{ track.progress }}%</span>
+            </div>
+            <div class="track-bar">
+                <div class="track-fill" data-value="{{ track.progress }}"></div>
+            </div>
+        </div>
+        {% endfor %}
+    {% else %}
+        <p style="color:#888;text-align:center">لم تبدأ أي مسار بعد 🚀</p>
+    {% endif %}
+</div>
+            <!-- Badges -->
+            <div class="section-card">
+                <h2><span class="sec-icon"></span> شاراتك</h2>
+                <div class="badges-grid">
+                    <div class="badge-item {% if videos_watched >= 1 %}earned{% endif %}" id="badge-first-video">
+                        <span class="badge-icon">🎬</span>
+                        <span class="badge-name">أول خطوة</span>
+                        <span class="badge-desc">شاهد أول فيديو</span>
+                    </div>
+                    <div class="badge-item {% if videos_watched >= 5 %}earned{% endif %}" id="badge-five-videos">
+                        <span class="badge-icon">📚</span>
+                        <span class="badge-name">محب التعلم</span>
+                        <span class="badge-desc">شاهد 5 فيديوهات</span>
+                    </div>
+                    <div class="badge-item {% if exams_done >= 1 %}earned{% endif %}" id="badge-first-exam">
+                        <span class="badge-icon">📝</span>
+                        <span class="badge-name">الاختبار الأول</span>
+                        <span class="badge-desc">أكمل أول اختبار</span>
+                    </div>
+                    <div class="badge-item {% if exam_history|selectattr('percent','equalto',100)|list|length > 0 %}earned{% endif %}" id="badge-perfect">
+                        <span class="badge-icon">💯</span>
+                        <span class="badge-name">مثالي</span>
+                        <span class="badge-desc">100% في اختبار</span>
+                    </div>
+                    <div class="badge-item {% if streak_days >= 3 %}earned{% endif %}" id="badge-streak3">
+                        <span class="badge-icon">🔥</span>
+                        <span class="badge-name">منتظم</span>
+                        <span class="badge-desc">3 أيام متواصلة</span>
+                    </div>
+                    <div class="badge-item {% if streak_days >= 7 %}earned{% endif %}" id="badge-streak7">
+                        <span class="badge-icon">⚡</span>
+                        <span class="badge-name">لا يتوقف</span>
+                        <span class="badge-desc">7 أيام متواصلة</span>
+                    </div>
+                    <div class="badge-item {% if avg_score >= 90 %}earned{% endif %}" id="badge-highavg">
+                        <span class="badge-icon">🌟</span>
+                        <span class="badge-name">متميز</span>
+                        <span class="badge-desc">معدل 90% فأكثر</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Certificates -->
+            <div class="section-card">
+                <h2><span class="sec-icon"></span> شهاداتك</h2>
+                {% if certificates %}
+                    <div class="badges-grid">
+                        {% for cert in certificates %}
+                        <div class="badge-item earned">
+                            <span class="badge-icon">🏆</span>
+                            <span class="badge-name">{{ cert.track_name or 'مسار' }}</span>
+                            <span class="badge-desc">{{ cert.percent }}% — {{ cert.taken_at[:10] }}</span>
+                            <a href="{{ url_for('certificate_download', exam_id=cert.id) }}" class="cert-download-btn">تحميل الشهادة</a>
+                        </div>
+                        {% endfor %}
+                    </div>
+                {% else %}
+                    <p class="empty-state">لم تحصل على شهادات بعد — أكمل امتحاناً بدرجة 60% فأكثر 🎯</p>
+                {% endif %}
+            </div>
+
+            <!-- Exam History -->
+            <div class="section-card">
+                <h2><span class="sec-icon"></span> سجل الامتحانات</h2>
+                {% if exam_history %}
+                <div class="exam-table-wrap">
+                    <table class="exam-table">
+                        <thead>
+                            <tr>
+                                <th>المسار</th>
+                                <th>الدرجة</th>
+                                <th>الإجابات</th>
+                                <th>المدة</th>
+                                <th>التاريخ</th>
+                                <th>الحالة</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {% for ex in exam_history %}
+                            <tr>
+                                <td>{{ ex.track_name or '—' }}</td>
+                                <td class="{% if ex.percent >= 60 %}exam-pass{% else %}exam-fail{% endif %}">{{ ex.percent }}%</td>
+                                <td>{{ ex.correct }} / {{ ex.total }}</td>
+                                <td>{{ ex.exam_duration_minutes ~ ' دقيقة' if ex.exam_duration_minutes else '—' }}</td>
+                                <td>{{ ex.taken_at[:10] }}</td>
+                                <td>
+                                    {% if ex.percent >= 60 %}
+                                        <span class="status-pass">✅ ناجح</span>
+                                    {% else %}
+                                        <span class="status-fail">❌ لم ينجح</span>
+                                    {% endif %}
+                                </td>
+                            </tr>
+                            {% endfor %}
+                        </tbody>
+                    </table>
+                </div>
+                {% else %}
+                    <p class="empty-state">لم تؤدِّ أي امتحان بعد 📝</p>
+                {% endif %}
+            </div>
+
+            <!-- Activity -->
+            <div class="section-card">
+                <h2><span class="sec-icon"></span> الأنشطة الأخيرة</h2>
+                <div class="activity-list" id="activity-list">
+                    {% if activities %}
+                        {% for act in activities %}
+                        <div class="activity-item">
+                            <span class="act-icon">📌</span>
+                            <span class="act-desc">{{ act.description }}</span>
+                            <span class="act-time">{{ act.happened_at[:10] }}</span>
+                        </div>
+                        {% endfor %}
+                    {% else %}
+                        <div class="empty-state">لا توجد أنشطة بعد — ابدأ التعلم الآن! 🚀</div>
+                    {% endif %}
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+    <!-- ══ مودال تعديل الملف الشخصي ══ -->
+    <div id="edit-modal" class="edit-modal-overlay" style="display:none">
+        <div class="edit-modal-box">
+            <div class="edit-modal-header">
+                <h2> تعديل الملف الشخصي</h2>
+                <button class="edit-modal-close" id="close-edit-modal">✕</button>
+            </div>
+
+            <form id="edit-profile-form" method="POST" action="{{ url_for('update_profile') }}">
+
+                <div class="edit-field">
+                    <label>الاسم الكامل</label>
+                    <input type="text" name="full_name" id="edit-full-name"
+                           value="{{ current_user.full_name }}" placeholder="اسمك الكامل" required>
+                </div>
+
+                <div class="edit-field">
+                    <label>اسم المستخدم</label>
+                    <input type="text" name="username" id="edit-username"
+                           value="{{ current_user.username or '' }}" placeholder="username">
+                </div>
+
+                <div class="edit-field">
+                    <label>المدينة</label>
+                    <input type="text" name="city" id="edit-city"
+                           value="{{ current_user.city or '' }}" placeholder="مثال: القاهره">
+                </div>
+
+                <div class="edit-field">
+                    <label>المرحلة الدراسية</label>
+                    <select name="level" id="edit-level">
+                        <option value="">— اختر —</option>
+                        <option value="ابتدائي"   {% if current_user.level == 'ابتدائي' %}selected{% endif %}>ابتدائي</option>
+                        <option value="إعدادي"    {% if current_user.level == 'إعدادي' %}selected{% endif %}>إعدادي</option>
+                        <option value="ثانوي"     {% if current_user.level == 'ثانوي' %}selected{% endif %}>ثانوي</option>
+                        <option value="جامعي"     {% if current_user.level == 'جامعي' %}selected{% endif %}>جامعي</option>
+                        <option value="خريج"      {% if current_user.level == 'خريج' %}selected{% endif %}>خريج</option>
+                        <option value="محترف"     {% if current_user.level == 'محترف' %}selected{% endif %}>محترف</option>
+                    </select>
+                </div>
+
+                <div class="edit-field">
+                    <label>هدفك التعليمي</label>
+                    <input type="text" name="goal" id="edit-goal"
+                           value="{{ current_user.goal or '' }}" placeholder="مثال: تطوير الويب">
+                </div>
+
+                <div class="edit-field">
+                    <label>المهارات <small style="color:#888">(افصل بينهم بفاصلة)</small></label>
+                    <input type="text" name="skills" id="edit-skills"
+                           value="{{ current_user.skills or '' }}" placeholder="مثال: Python, HTML, SQL">
+                </div>
+
+                <div class="edit-modal-actions">
+                    <button type="submit" class="btn-edit">💾 حفظ التغييرات</button>
+                    <button type="button" class="btn-share" id="close-edit-modal-2">إلغاء</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

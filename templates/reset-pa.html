@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html dir="rtl" lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <title>إعادة تعيين كلمة المرور</title>
+    <link rel="stylesheet" href="{{ url_for('static',filename='css/g.css')}}">
+</head>
+<body class="register-page">
+    <header class="main-header">
+         <div class="nav-container">
+    <a href="{{ url_for('forgot') }}" class="btn-modern3">رجوع</a> 
+    <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a> 
+    </div>
+    <div class="logo-container">
+    <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+    <img src="{{ url_for('static',filename='image/lo.png')}}" alt="شعار" class='header-logo'>
+    </header>  
+       <div class="glass-container">
+        <h2>تعيين كلمة مرور جديدة</h2>
+        <p>أدخل كلمة مرور جديدة لحسابك</p>
+
+        <form action="/reset-password" method="POST">
+            <div class="input-group">
+                <input type="email" name="email" placeholder="البريد الإلكتروني" required>
+            </div>
+            <div class="input-group">
+                <input type="password" name="password" placeholder="كلمة المرور الجديدة" required>
+            </div>
+            
+            <div class="input-group">
+                <input type="password" name="password2" placeholder="تأكيد كلمة المرور" required>
+            </div>
+
+            <button type="submit" class="btn-modern">تحديث كلمة المرور</button>
+        </form>
+    </div>
+</div>
+   <script src="{{ url_for('static',filename='js/script.js')}}"></script>
+</body>
+</html>

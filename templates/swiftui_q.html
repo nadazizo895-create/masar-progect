@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <title>امتحان SwiftUI - مسار</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/g.css') }}">
+</head>
+<body class="final-exam-page">
+    <header class="main-header">
+        <div class="nav-container">
+            <a href="{{ url_for('lessons', slug='swiftui') }}" class="btn-modern3">رجوع</a>
+            <a href="{{ url_for('profile') }}" class="btn-modern3">ملفي الشخصي</a>
+        </div>
+        <div class="logo-container">
+            <a href="{{ url_for('index') }}" class="brand-name">Masar</a>
+            <img src="{{ url_for('static', filename='image/lo.png') }}" alt="شعار" class="header-logo">
+        </div>
+    </header>
+    <div class="main-content">
+        <h1>امتحان SwiftUI </h1>
+        <p>10 أسئلة تغطي أساسيات SwiftUI. بالتوفيق!</p>
+        <form action="/exam/swiftui" method="POST" class="exam-form">
+            <div class="question-card"><p>1. ما لغة برمجة SwiftUI؟</p>
+                <label><input type="radio" name="q1" value="1"> Swift</label>
+                <label><input type="radio" name="q1" value="0"> Objective-C</label>
+                <label><input type="radio" name="q1" value="0"> Dart</label></div>
+            <div class="question-card"><p>2. ما الـ View لعرض نص في SwiftUI؟</p>
+                <label><input type="radio" name="q2" value="1"> Text()</label>
+                <label><input type="radio" name="q2" value="0"> Label()</label>
+                <label><input type="radio" name="q2" value="0"> TextView()</label></div>
+            <div class="question-card"><p>3. ما الـ View للتخطيط العمودي في SwiftUI؟</p>
+                <label><input type="radio" name="q3" value="1"> VStack</label>
+                <label><input type="radio" name="q3" value="0"> HStack</label>
+                <label><input type="radio" name="q3" value="0"> ZStack</label></div>
+            <div class="question-card"><p>4. ما الـ View للتخطيط الأفقي في SwiftUI؟</p>
+                <label><input type="radio" name="q4" value="1"> HStack</label>
+                <label><input type="radio" name="q4" value="0"> VStack</label>
+                <label><input type="radio" name="q4" value="0"> ZStack</label></div>
+            <div class="question-card"><p>5. ما الـ View للتكديس (تراكب) في SwiftUI؟</p>
+                <label><input type="radio" name="q5" value="1"> ZStack</label>
+                <label><input type="radio" name="q5" value="0"> HStack</label>
+                <label><input type="radio" name="q5" value="0"> VStack</label></div>
+            <div class="question-card"><p>6. كيف ندير الحالة في SwiftUI؟</p>
+                <label><input type="radio" name="q6" value="1"> @State</label>
+                <label><input type="radio" name="q6" value="0"> useState</label>
+                <label><input type="radio" name="q6" value="0"> remember</label></div>
+            <div class="question-card"><p>7. ما الـ View للزر في SwiftUI؟</p>
+                <label><input type="radio" name="q7" value="1"> Button()</label>
+                <label><input type="radio" name="q7" value="0"> Tap()</label>
+                <label><input type="radio" name="q7" value="0"> ClickView()</label></div>
+            <div class="question-card"><p>8. ما الـ View لعرض قائمة في SwiftUI؟</p>
+                <label><input type="radio" name="q8" value="1"> List()</label>
+                <label><input type="radio" name="q8" value="0"> ListView()</label>
+                <label><input type="radio" name="q8" value="0"> Table()</label></div>
+            <div class="question-card"><p>9. ما الـ View للصورة في SwiftUI؟</p>
+                <label><input type="radio" name="q9" value="1"> Image()</label>
+                <label><input type="radio" name="q9" value="0"> Img()</label>
+                <label><input type="radio" name="q9" value="0"> Picture()</label></div>
+            <div class="question-card"><p>10. ما أداة معاينة الواجهة مباشرة في SwiftUI؟</p>
+                <label><input type="radio" name="q10" value="1"> Preview</label>
+                <label><input type="radio" name="q10" value="0"> Simulator</label>
+                <label><input type="radio" name="q10" value="0"> LiveView</label></div>
+            <div class="button-row">
+                <button type="submit" class="btn-modern">إرسال الإجابات</button>
+                <a href="{{ url_for('logout') }}" class="btn-modern">تسجيل خروج</a>
+            </div>
+        </form>
+    </div>
+    <div id="chat-icon" onclick="toggleChat()">💬</div>
+    <div id="ai-chat-container">
+        <div id="chat-header">بوت مسار الذكي</div>
+        <div id="chat-output">أهلاً، أنا مساعدك الذكي.</div>
+        <div id="chat-input-area">
+            <input type="text" id="user-query" placeholder="اكتب سؤالك هنا...">
+            <button id="send-btn">إرسال</button>
+        </div>
+    </div>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>
