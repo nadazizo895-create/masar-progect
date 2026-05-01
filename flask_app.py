@@ -1966,6 +1966,12 @@ def api_delete_training(tid):
 #  RUN
 # ════════════════════════════════════════════════════════
 app = app
+
+# يشتغل تلقائياً على Railway عشان ينشئ الجداول
+with app.app_context():
+    init_db()
+    migrate_db()
+
 if __name__ == "__main__":
     with app.app_context():
         init_db()
