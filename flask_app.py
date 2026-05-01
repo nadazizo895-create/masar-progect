@@ -1329,7 +1329,7 @@ def profile():
 
     # ── عدد الفيديوهات من جدول activities (كل نشاط "شاهد" = فيديو) ──
     videos_row = query(
-        "SELECT COUNT(*) as cnt FROM activities WHERE user_id=? AND (description LIKE '%فيديو%' OR description LIKE '%محاضرة%' OR description LIKE '%شاهد%')",
+        "SELECT COUNT(*) as cnt FROM activities WHERE user_id=? AND (description LIKE '%%فيديو%%' OR description LIKE '%%محاضرة%%' OR description LIKE '%%شاهد%%')",
         (user_id,), one=True,
     )
     # fallback على العمود القديم لو مفيش أنشطة مسجلة
@@ -1337,7 +1337,7 @@ def profile():
 
     # ── الأيام المتواصلة: عدد الأيام المختلفة اللي فيها نشاط ──
     streak_row = query(
-        "SELECT COUNT(DISTINCT date(happened_at)) as days FROM activities WHERE user_id=?",
+        "SELECT COUNT(DISTINCT happened_at::date) as days FROM activities WHERE user_id=?",
         (user_id,), one=True,
     )
     streak_days = streak_row["days"] if streak_row else user.get("streak_days", 0)
