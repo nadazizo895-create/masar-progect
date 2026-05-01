@@ -1,18 +1,21 @@
 """
 ================================================================
   app.py  —  منصة مسار التعليمية
-  Flask + SQLite  —  Python Backend الكامل
+  Flask + PostgreSQL  —  Python Backend الكامل
   ✅ مُصلح: يستخدم render_template مع ملفات HTML حقيقية
+  ✅ مُحدَّث: PostgreSQL بدلاً من SQLite للنشر على Railway
 ================================================================
 """
 
 import os
 import io
-import sqlite3
 import hashlib
 import secrets
 from datetime import datetime
 from functools import wraps
+
+import psycopg2
+import psycopg2.extras
 
 from flask import (
     Flask, render_template, request,
@@ -30,7 +33,7 @@ app = Flask(__name__)
 app.secret_key = os.environ.get("SECRET_KEY", "masar-dev-secret-2026")
 
 BASE_DIR      = os.path.dirname(os.path.abspath(__file__))
-DB_PATH       = os.path.join(BASE_DIR, "masar.db")
+DATABASE_URL  = os.environ.get("DATABASE_URL")
 UPLOAD_FOLDER = os.path.join(BASE_DIR, "static", "uploads")
 os.makedirs(UPLOAD_FOLDER, exist_ok=True)
 app.config["UPLOAD_FOLDER"]      = UPLOAD_FOLDER
@@ -38,14 +41,12 @@ app.config["MAX_CONTENT_LENGTH"] = 5 * 1024 * 1024   # 5 MB
 
 
 # ════════════════════════════════════════════════════════
-#  DATABASE LAYER
+#  DATABASE LAYER — PostgreSQL
 # ════════════════════════════════════════════════════════
 def get_db():
     db = getattr(g, "_db", None)
     if db is None:
-        db = g._db = sqlite3.connect(DB_PATH)
-        db.row_factory = sqlite3.Row
-        db.execute("PRAGMA foreign_keys = ON")
+        db = g._db = psycopg2.connect(DATABASE_URL)
     return db
 
 
@@ -57,25 +58,49 @@ def close_db(_exc):
 
 
 def query(sql, args=(), one=False):
-    cur = get_db().execute(sql, args)
+    # تحويل ? إلى %s لـ PostgreSQL
+    sql = sql.replace("?", "%s")
+    db  = get_db()
+    cur = db.cursor(cursor_factory=psycopg2.extras.RealDictCursor)
+    cur.execute(sql, args)
     rv  = cur.fetchone() if one else cur.fetchall()
-    return (dict(rv) if rv else None) if one else [dict(r) for r in rv]
+    cur.close()
+    if one:
+        return dict(rv) if rv else None
+    return [dict(r) for r in rv]
 
 
 def execute(sql, args=()):
+    # تحويل ? إلى %s لـ PostgreSQL
+    sql = sql.replace("?", "%s")
+    # إضافة RETURNING id لجلب الـ lastrowid
+    if sql.strip().upper().startswith("INSERT") and "RETURNING" not in sql.upper():
+        sql = sql.rstrip().rstrip(";") + " RETURNING id"
     db  = get_db()
-    cur = db.execute(sql, args)
+    cur = db.cursor()
+    cur.execute(sql, args)
     db.commit()
-    return cur.lastrowid
+    if sql.strip().upper().startswith("INSERT"):
+        row = cur.fetchone()
+        cur.close()
+        return row[0] if row else None
+    cur.close()
+    return None
 
 
 def migrate_db():
     """Add new columns to existing database without losing data."""
-    db = sqlite3.connect(DB_PATH)
+    db = psycopg2.connect(DATABASE_URL)
     c  = db.cursor()
 
+    def col_exists(table, col):
+        c.execute("""
+            SELECT 1 FROM information_schema.columns
+            WHERE table_name=%s AND column_name=%s
+        """, (table, col))
+        return c.fetchone() is not None
+
     # ── users ──
-    existing_cols = {row[1] for row in c.execute("PRAGMA table_info(users)")}
     new_cols_users = {
         "username":     "TEXT UNIQUE",
         "city":         "TEXT",
@@ -87,12 +112,11 @@ def migrate_db():
         "last_updated": "TEXT",
     }
     for col, col_type in new_cols_users.items():
-        if col not in existing_cols:
+        if not col_exists("users", col):
             c.execute(f"ALTER TABLE users ADD COLUMN {col} {col_type}")
             print(f"✅ Migration: added column '{col}' to users")
 
     # ── tracks ──
-    existing_track_cols = {row[1] for row in c.execute("PRAGMA table_info(tracks)")}
     new_cols_tracks = {
         "level":      "TEXT",
         "duration":   "TEXT",
@@ -100,20 +124,19 @@ def migrate_db():
         "created_at": "TEXT",
     }
     for col, col_type in new_cols_tracks.items():
-        if col not in existing_track_cols:
+        if not col_exists("tracks", col):
             c.execute(f"ALTER TABLE tracks ADD COLUMN {col} {col_type}")
             print(f"✅ Migration: added column '{col}' to tracks")
 
     # ── cvs ──
-    existing_cv_cols = {row[1] for row in c.execute("PRAGMA table_info(cvs)")}
-    if "trainings" not in existing_cv_cols:
+    if not col_exists("cvs", "trainings"):
         c.execute("ALTER TABLE cvs ADD COLUMN trainings TEXT")
         print("✅ Migration: added column 'trainings' to cvs")
 
     # ── trainings table ──
     c.execute("""
         CREATE TABLE IF NOT EXISTS trainings (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             user_id         INTEGER NOT NULL
                             REFERENCES users(id) ON DELETE CASCADE,
             title           TEXT    NOT NULL,
@@ -124,7 +147,7 @@ def migrate_db():
             description     TEXT,
             certificate_url TEXT,
             created_at      TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
+                            DEFAULT (NOW()::TEXT)
         )
     """)
 
@@ -134,19 +157,15 @@ def migrate_db():
 
 def init_db():
     """Create tables and seed data — runs once on startup."""
-    db = sqlite3.connect(DB_PATH)
-    db.row_factory = sqlite3.Row
-    db.execute("PRAGMA foreign_keys = ON")
-    c = db.cursor()
-    c.executescript("""
-        -- ════════════════════════════════════════
-        --  CORE: users
-        -- ════════════════════════════════════════
+    db = psycopg2.connect(DATABASE_URL)
+    c  = db.cursor()
+
+    c.execute("""
         CREATE TABLE IF NOT EXISTS users (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             full_name       TEXT    NOT NULL,
             username        TEXT    UNIQUE,
-            email           TEXT    NOT NULL UNIQUE COLLATE NOCASE,
+            email           TEXT    NOT NULL UNIQUE,
             password_hash   TEXT    NOT NULL,
             city            TEXT,
             level           TEXT,
@@ -160,54 +179,46 @@ def init_db():
             avatar          TEXT,
             role            TEXT    NOT NULL DEFAULT 'student'
                             CHECK(role IN ('student','instructor','admin')),
-            last_updated    TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime')),
-            joined_at       TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            last_updated    TEXT    NOT NULL DEFAULT (NOW()::TEXT),
+            joined_at       TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Departments — الأقسام
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS departments (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             name            TEXT    NOT NULL,
             description     TEXT,
             icon            TEXT,
-            created_at      TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            created_at      TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Books — الكتب
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS books (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             title           TEXT    NOT NULL,
             author          TEXT,
             dept_id         INTEGER REFERENCES departments(id) ON DELETE SET NULL,
             price           REAL,
             published_at    TEXT,
-            created_at      TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            created_at      TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Programming Languages — لغات البرمجة
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS programming_languages (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             name            TEXT    NOT NULL,
             dept_id         INTEGER REFERENCES departments(id) ON DELETE SET NULL,
             tools           TEXT,
             version         TEXT
-        );
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Courses — الدورات التدريبية  (tracks renamed for clarity)
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS tracks (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            id          SERIAL PRIMARY KEY,
             slug        TEXT    NOT NULL UNIQUE,
             name_ar     TEXT    NOT NULL,
             name_en     TEXT    NOT NULL,
@@ -215,56 +226,49 @@ def init_db():
             level       TEXT,
             duration    TEXT,
             dept_id     INTEGER REFERENCES departments(id) ON DELETE SET NULL,
-            created_at  TEXT    NOT NULL
-                        DEFAULT (datetime('now','localtime'))
-        );
+            created_at  TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Courses (from schema) — prog_lang ↔ department
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS lang_courses (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             prog_lang_id    INTEGER NOT NULL
                             REFERENCES programming_languages(id) ON DELETE CASCADE,
             name            TEXT    NOT NULL,
             dept_id         INTEGER REFERENCES departments(id) ON DELETE SET NULL,
             tools           TEXT,
-            created_at      TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            created_at      TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Exams — الامتحانات
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS exams (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             title           TEXT    NOT NULL,
             dept_id         INTEGER REFERENCES departments(id) ON DELETE SET NULL,
-            duration        INTEGER,                  -- بالدقائق
+            duration        INTEGER,
             total_questions INTEGER NOT NULL DEFAULT 10,
             max_score       INTEGER NOT NULL DEFAULT 100,
-            created_at      TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            created_at      TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Questions — الأسئلة
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS questions (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             exam_id         INTEGER NOT NULL
                             REFERENCES exams(id) ON DELETE CASCADE,
             text            TEXT    NOT NULL,
             type            TEXT    NOT NULL DEFAULT 'MCQ'
                             CHECK(type IN ('MCQ','true_false','short')),
             answer          TEXT
-        );
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  CVs — السير الذاتية
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS cvs (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             user_id         INTEGER NOT NULL UNIQUE
                             REFERENCES users(id) ON DELETE CASCADE,
             title           TEXT,
@@ -272,15 +276,13 @@ def init_db():
             experience      TEXT,
             education       TEXT,
             trainings       TEXT,
-            last_updated    TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            last_updated    TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  Trainings — التدريبات
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS trainings (
-            id              INTEGER PRIMARY KEY AUTOINCREMENT,
+            id              SERIAL PRIMARY KEY,
             user_id         INTEGER NOT NULL
                             REFERENCES users(id) ON DELETE CASCADE,
             title           TEXT    NOT NULL,
@@ -290,60 +292,52 @@ def init_db():
             end_date        TEXT,
             description     TEXT,
             certificate_url TEXT,
-            created_at      TEXT    NOT NULL
-                            DEFAULT (datetime('now','localtime'))
-        );
+            created_at      TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  user_tracks — ربط المستخدم بالمسار
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS user_tracks (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            id          SERIAL PRIMARY KEY,
             user_id     INTEGER NOT NULL
                         REFERENCES users(id) ON DELETE CASCADE,
             track_id    INTEGER NOT NULL
                         REFERENCES tracks(id) ON DELETE CASCADE,
             progress    INTEGER NOT NULL DEFAULT 0,
-            started_at  TEXT    NOT NULL
-                        DEFAULT (datetime('now','localtime')),
+            started_at  TEXT    NOT NULL DEFAULT (NOW()::TEXT),
             UNIQUE(user_id, track_id)
-        );
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  quiz_answers
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS quiz_answers (
-            id            INTEGER PRIMARY KEY AUTOINCREMENT,
+            id            SERIAL PRIMARY KEY,
             user_id       INTEGER NOT NULL
                           REFERENCES users(id) ON DELETE CASCADE,
             q1            TEXT,
             q2            TEXT,
             q3            TEXT,
             result_track  TEXT,
-            taken_at      TEXT NOT NULL
-                          DEFAULT (datetime('now','localtime'))
-        );
+            taken_at      TEXT NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  exam_results
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS exam_results (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            id          SERIAL PRIMARY KEY,
             user_id     INTEGER NOT NULL
                         REFERENCES users(id) ON DELETE CASCADE,
             track_id    INTEGER REFERENCES tracks(id),
             correct     INTEGER NOT NULL DEFAULT 0,
             total       INTEGER NOT NULL DEFAULT 0,
             percent     INTEGER NOT NULL DEFAULT 0,
-            taken_at    TEXT    NOT NULL
-                        DEFAULT (datetime('now','localtime'))
-        );
+            taken_at    TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  payments — المدفوعات
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS payments (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            id          SERIAL PRIMARY KEY,
             user_id     INTEGER NOT NULL
                         REFERENCES users(id) ON DELETE CASCADE,
             amount      REAL    NOT NULL DEFAULT 50.0,
@@ -351,32 +345,25 @@ def init_db():
             status      TEXT    NOT NULL DEFAULT 'pending'
                         CHECK(status IN ('pending','done','failed')),
             paid_at     TEXT,
-            created_at  TEXT    NOT NULL
-                        DEFAULT (datetime('now','localtime'))
-        );
+            created_at  TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
+    """)
 
-        -- ════════════════════════════════════════
-        --  activities
-        -- ════════════════════════════════════════
+    c.execute("""
         CREATE TABLE IF NOT EXISTS activities (
-            id          INTEGER PRIMARY KEY AUTOINCREMENT,
+            id          SERIAL PRIMARY KEY,
             user_id     INTEGER NOT NULL
                         REFERENCES users(id) ON DELETE CASCADE,
             description TEXT    NOT NULL,
             score       TEXT,
-            happened_at TEXT    NOT NULL
-                        DEFAULT (datetime('now','localtime'))
-        );
+            happened_at TEXT    NOT NULL DEFAULT (NOW()::TEXT)
+        )
     """)
 
-    c.executemany(
-        "INSERT OR IGNORE INTO tracks (slug,name_ar,name_en,description) VALUES (?,?,?,?)", 
-        [
-            # مسارات رئيسية
+    tracks_data = [
             ("web",               "تطوير الويب",        "Web Development",       "HTML, CSS, JavaScript, React"),
             ("mobile",            "تطبيقات الجوال",     "Mobile Apps",           "Flutter, React Native, Android, iOS"),
             ("data",              "تحليل البيانات",     "Data Analysis",         "Python, Pandas, SQL, Power BI"),
-            # لغات منفصلة - ويب
             ("html",               "HTML",                "HTML",                 "بناء هيكل صفحات الويب"),
             ("css",                "CSS",                 "CSS",                  "تنسيق وتصميم صفحات الويب"),
             ("js",                 "JS",                  "JS",                   "البرمجة التفاعلية للويب"),
@@ -386,48 +373,48 @@ def init_db():
             ("php",                "PHP",                 "PHP",                  "تطوير مواقع الويب الديناميكية "),
             ("sql",                "SQL",                 "SQL",                  "اداره وتنظيم قواعد البيانات"),
             ("firebase",           "Firebase",            "Firebase",             "حلول قواعد البيانات السحابيه المتكامله"),
-            # لغات منفصلة - جوال
             ("flutter",            "Flutter",             "Flutter",              "تطبيقات متعددة المنصات بـ Dart"),
             ("react_native",       "React Native",        "React Native",         "تطبيقات iOS و Android بـ JavaScript"),
             ("kotlin",             "Kotlin",              "Kotlin",               "تطبيقات Android الأصيلة"),
             ("java",               "JAVA" ,               "JAVA" ,                "تطبيقات الاندرويد"),
             ("xcode",              "Xcode",               "Xcode",                " البيئه الرسميه لتطوير تطبيقات ايفون"),
             ("android_studio",     "Android_Studio",      "Android_Studio",       "البيئه الرسميه لتطوير تطبيفات الاندرويد"),
-            ("authentication",     "Authentication",      "Authentication",       "نظم التحقق من الهويه وتسجيل الدخول"), 
+            ("authentication",     "Authentication",      "Authentication",       "نظم التحقق من الهويه وتسجيل الدخول"),
             ("local_storge",       "Local_Storge",        "Local_Storge",         "تخزين البيانات محليا على جهاز المستخدم"),
             ("push_notifications", "Push_Notifications",  "Push_Notifications",   "ارسال واستقبال التنبيهات الفوريه"),
             ("swift",              "Swift",               "Swift",                "تطبيقات iOS الأصيلة"),
-            ("xml",                "XML",                 "XML" ,                 "تصميم واجهات المستخدم التقليدية للأندرويد") ,         
+            ("xml",                "XML",                 "XML" ,                 "تصميم واجهات المستخدم التقليدية للأندرويد"),
             ("uikit",              "UIKIT",               "UIKIT",                "الإطار الأساسي لبناء واجهات تطبيقات iOS"),
-            ("jetpack_compose",    "Jetpack_Compose",     "Jetpack_Compose",      "بناء واجهات أندرويد حديثة بأسلوب برمجى متطور" ),
+            ("jetpack_compose",    "Jetpack_Compose",     "Jetpack_Compose",      "بناء واجهات أندرويد حديثة بأسلوب برمجى متطور"),
             ("swiftui",            "Swiftui",             "Swiftui",              "أحدث تقنيات بناء واجهات مستخدم Apple"),
-            ("rest_api",           "rest_api",            "Rest_Api",             "ربط التطبيق بالسيرفر وتبادل البيانات" ),
-            # لغات منفصلة - بيانات  (python و sql مُعرَّفان أعلاه بالفعل)
-            # ("python", ...) ← مكرر — تم حذفه
-            # ("sql",    ...) ← مكرر — تم حذفه
+            ("rest_api",           "rest_api",            "Rest_Api",             "ربط التطبيق بالسيرفر وتبادل البيانات"),
             ("pandas",              "Pandas",              "Pandas",               "مكتبه تحليل وهيكله البيانات"),
             ("numpy",               "Numpy",               "Numpy",                "المعالجه الرياضيه والمصفوفات الحسابيه"),
             ("matplotlib",          "matplotlib",          "matplotlib",           "تمثيل البيانات والرسوم البيانيه"),
             ("powerbi",             "Powerbi",             "Powerbi",              "تحليل بيانات الاعمال واعداد التقارير الاستراتيجيه"),
             ("tableau",             "Tableau",             "Tableau",              "تصوير وتحليل البيانات التفاعليه"),
-        ],
-    )
+    ]
+    for t in tracks_data:
+        c.execute(
+            "INSERT INTO tracks (slug,name_ar,name_en,description) VALUES (%s,%s,%s,%s) ON CONFLICT (slug) DO NOTHING",
+            t,
+        )
 
     admin_hash = hashlib.sha256("Admin@1234".encode()).hexdigest()
     c.execute(
-        "INSERT OR IGNORE INTO users (full_name,email,password_hash,is_paid,is_admin) VALUES (?,?,?,1,1)",
+        "INSERT INTO users (full_name,email,password_hash,is_paid,is_admin) VALUES (%s,%s,%s,1,1) ON CONFLICT (email) DO NOTHING",
         ("مدير مسار", "admin@masar.com", admin_hash),
     )
 
     student_hash = hashlib.sha256("Test@1234".encode()).hexdigest()
     c.execute(
-        "INSERT OR IGNORE INTO users (full_name,email,password_hash,is_paid,streak_days,videos_watched,badges) VALUES (?,?,?,1,12,24,5)",
+        "INSERT INTO users (full_name,email,password_hash,is_paid,streak_days,videos_watched,badges) VALUES (%s,%s,%s,1,12,24,5) ON CONFLICT (email) DO NOTHING",
         ("ندى طلعت عبدالعزيز", "nada@masar.com", student_hash),
     )
 
     db.commit()
     db.close()
-    print("✅ Database ready:", DB_PATH)
+    print("✅ Database ready: PostgreSQL")
 
 
 # ════════════════════════════════════════════════════════
@@ -733,7 +720,7 @@ def track_detail(slug):
     # لو مسجل — سجّل دخوله في user_tracks
     if session.get("user_id"):
         execute(
-            "INSERT OR IGNORE INTO user_tracks (user_id,track_id) VALUES (?,?)",
+            "INSERT INTO user_tracks (user_id,track_id) VALUES (?,?) ON CONFLICT (user_id,track_id) DO NOTHING",
             (session["user_id"], track["id"]),
         )
 
@@ -1585,7 +1572,7 @@ def lang_detail(slug):
 
     user_id = session["user_id"]
     execute(
-        "INSERT OR IGNORE INTO user_tracks (user_id,track_id) VALUES (?,?)",
+        "INSERT INTO user_tracks (user_id,track_id) VALUES (?,?) ON CONFLICT (user_id,track_id) DO NOTHING",
         (user_id, track["id"]),
     )
     return redirect(url_for("lessons", slug=slug))
@@ -1736,7 +1723,7 @@ def api_add_language():
     if not name:
         return jsonify({"ok": False, "error": "الاسم مطلوب"}), 400
     lid = execute(
-        "INSERT OR IGNORE INTO programming_languages (name,dept_id,tools,version) VALUES (?,?,?,?)",
+        "INSERT INTO programming_languages (name,dept_id,tools,version) VALUES (?,?,?,?) ON CONFLICT DO NOTHING",
         (name, data.get("dept_id"), data.get("tools"), data.get("version")),
     )
     return jsonify({"ok": True, "id": lid})
@@ -1875,7 +1862,7 @@ def api_save_cv():
     existing = query("SELECT id FROM cvs WHERE user_id=?", (user_id,), one=True)
     if existing:
         execute(
-            "UPDATE cvs SET title=?,skills=?,experience=?,education=?,trainings=?,last_updated=datetime('now','localtime') "
+            "UPDATE cvs SET title=?,skills=?,experience=?,education=?,trainings=?,last_updated=NOW()::TEXT "
             "WHERE user_id=?",
             (data.get("title"), data.get("skills"), data.get("experience"),
              data.get("education"), data.get("trainings"), user_id),
